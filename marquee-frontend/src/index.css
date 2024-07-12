@@ -2,6 +2,31 @@
   @tailwind components;
   @tailwind utilities;
 
+
+  /*
+  Blue:           0 77 155
+  Muted Blue:     0 122 190
+  Light Blue:     0 162 191
+  Green:          0 199 164
+  Light Green:    131 228 129
+  Yellow:         252 245 111
+  Black:          13 25 26
+  White:          255 255 248       
+  */
+
+  /*
+  @layer base {
+    :root {
+      --color-primary: 0 77 155;
+      --color-secondary: 252 245 111;
+      --accent: 0 199 164; 
+      --background: 255 255 248;
+      --muted: 12 25 26;
+    }
+  }
+  */
+
+  
   @layer base {
     :root {
       --background: 0 0% 100%;
