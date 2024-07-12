@@ -1,32 +1,40 @@
 # Marquee Rental Service Web Application
 
-Web application for a marquee rental service company.  Developed for internal use to streamline operations for company workers within different departments.
+Web application for a marquee rental service company.  Developed for internal use to streamline operations for company workers within different departments and workflows.
 
 ## Features
 
-The system includes a variety of features designed to streamline operations for company workers. Each listed feature is detailed in their respective section below. Features currently being implemented or already implemented include:
+The system includes a variety of features designed to streamline operations for company workers. Each feature corresponds to a department or major workflow within the company and consists of multiple sub-features, referred to as functionalities. These functionalities are tailored to support specific tasks within the broader feature. Each listed feature is detailed in their respective sections below. Features currently being implemented or already implemented include:
 
-- [ ] Authentication and Authorization
-- [ ] Inventory management system
+- [ ] Authentication and Authorization (AA)
+- [ ] Inventory Management System (IMS)
 
 ### Authenication and Authorization
 
-The Authentication and Authorization features enables the use of role-based authentication and claim-based authentication to restrict access to certain features and resources. The following features entail details on how authorization has been utilized specificallty in the respective feature. The roles have been developed using *the principle of least prielege*. The roles currently offered by the system are:
+The Authentication and Authorization features enables the use of role-based authentication and claim-based authentication to restrict access to certain features and resources. The following features entail details on how authorization has been utilized specificallty in the respective feature. The roles have been developed using *the principle of least prielege*. The table below lists the currently available roles, the respective feature they relate to, and a description of the permission given to each role.
 
 |Role|Feature|Description|
 |---|---|---|
-|Admin|Global|Posseses all permissions within the system, including administrative and configuration capabilites|
-|Inventory Manager|Inventory Management System|Posseses all permissions given within the inventory management system. Including adding, editing, deleting inventory items, and modyfying the list of items.|
-|Inventory Worker|Inventory Management System|Posseses the minimal required permissions to perform daily inventory tasks, such as updating stock levels and recording transactions.|
-|Inventory Viewer|Inventory Management System| Posseses read-only permissions, allowing them to view inventory data without making any changes.|
+|Admin|Global|Posseses all permissions within the system, including administrative and configuration capabilites.|
+|Role Manager|AA|Posseses permissions to manage roles, including adding and removing roles, as well as managing permissions given to roles.|
+|User Manager|AA|Posseses permissions to manage users and their roles, including adding, removing, and updating users, whilst also managing users' roles.|
+|Inventory Manager|IMS|Posseses all permissions given within the inventory management system. Including adding, editing, deleting inventory items, and modyfying the list of items.|
+|Inventory Worker|IMS|Posseses the minimal required permissions to perform daily inventory tasks, such as updating stock levels and recording transactions.|
+|Inventory Viewer|IMS| Posseses read-only permissions, allowing them to view inventory data without making any changes.|
 
-[!NOTE]
-Useful information that users should know, even when skimming content.
+<!--- FOR REMEMBRANCE
+> [!NOTE]
+> Useful information that users should know, even when skimming content. 
+-->
 
 #### Functionalities
 
-- [ ] Login functionaliy
-- [ ] Authorized routing
+|Name|Purpose|Description|
+|---|---|---|
+|Login|Allows for the authentication of users.|The user is required to log in when accessing the internal pages.|
+|Authorized routing|Restricts access to certain functionalities by restricting page access to certain roles and claims.|The user is required to posses the correct permissions to access restricted pages.|
+|Role Dashboard|Allows the user to modify the roles within the system.|The user may add, update, and remove roles. The user may also modify a roles' permissions by modifying its claims.|
+|User Dashboard|Allows the user to access the user within the system.|The user may add, update, and remove users within the system. The user may also modify a user's permissions either by modifying their roles or claims.|
 
 ### Inventory management system
 
@@ -36,7 +44,6 @@ The inventory management system helps workers track and update the inventory. Th
 
 |Role|Feature|Description|
 |---|---|---|
-
 
 ## Potential future features
 
