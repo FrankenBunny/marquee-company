@@ -22,3 +22,23 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Vite ignore (Folder is marquee-frontend)
+marquee-frontend/!**/glob-import/dir/node_modules
+marquee-frontend/.DS_Store
+marquee-frontend/.idea
+marquee-frontend/.pnpm-store
+marquee-frontend/*.cpuprofile
+marquee-frontend/*.local
+marquee-frontend/*.log
+marquee-frontend//.vscode/
+marquee-frontend//docs/.vitepress/cache
+marquee-frontend//packages/vite/LICENSE
+marquee-frontend/dist
+marquee-frontend/dist-ssr
+marquee-frontend/explorations
+marquee-frontend/node_modules
+marquee-frontend/playground-temp
+marquee-frontend/temp
+marquee-frontend/TODOs.md
+marquee-frontend/.eslintcache
