@@ -40,6 +40,11 @@ The Authentication and Authorization features enables the use of role-based auth
 
 The inventory management system helps workers track and update the inventory. The system allows the users to update the number of items in stock, rented out, and faulty for each item available in the system. Specific users may also edit the list of items themselves, determined by their role.
 
+#### Functionalities
+
+- [ ] Modify item list for inventory
+- [ ] Modify number or items in inventory
+
 #### Authorization
 
 |Role|Feature|Description|
