@@ -24,6 +24,7 @@ hs_err_pid*
 replay_pid*
 
 # Vite ignore (Folder is marquee-frontend)
+marquee-frontent/.vite
 marquee-frontend/!**/glob-import/dir/node_modules
 marquee-frontend/.DS_Store
 marquee-frontend/.idea
