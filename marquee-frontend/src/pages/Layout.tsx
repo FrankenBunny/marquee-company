@@ -19,11 +19,11 @@ const Layout = () => {
         <NavigationMenu className="shadow-lg max-w-full justify-start">
             <NavigationMenuList className="">
                 <NavigationMenuItem>
-                    <a href="/users">
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    <NavigationMenuLink asChild>
+                        <a href="/" className={navigationMenuTriggerStyle()}>
                             Hem
-                        </NavigationMenuLink>
-                    </a>
+                        </a>
+                    </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                     <NavigationMenuTrigger>Hantera</NavigationMenuTrigger>
@@ -60,34 +60,3 @@ const Layout = () => {
 };
 
 export default Layout;
-
-/*
-import {
-  Menubar,
-  MenubarCheckboxItem,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
-  MenubarTrigger,
-} from "@/components/ui/menubar"
-<Menubar>
-<MenubarMenu>
-  <MenubarTrigger>Hantera</MenubarTrigger>
-  <MenubarContent>
-    <MenubarItem>
-      <Link to="">Behörigheter</Link>
-    </MenubarItem>
-    <MenubarItem>
-      <Link to="/users">Användare</Link>
-    </MenubarItem>
-  </MenubarContent>
-</MenubarMenu>
-</Menubar>
-*/
