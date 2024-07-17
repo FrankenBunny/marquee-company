@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import { useAuthentication } from '../../authcontext/AuthenticationContext';
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod/src/zod.js';
@@ -7,14 +6,13 @@ import { Button } from '../../components/ui/button';
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
   } from "../../components/ui/form";
 import { Input } from "../../components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 
 
 const loginSchema = z.object({
@@ -59,10 +57,9 @@ const Login = () => {
 
     return (
         <div className="flex items-center h-screen justify-center bg-marquee_blue-300">
-            <Card className="w-[350px]">
+            <Card className="w-[350px] bg-marquee_neutral-100">
                 <CardHeader>
-                    <CardTitle>Login</CardTitle>
-                    <CardDescription>Enter your user credentials here to login and access the web application.</CardDescription>
+                    <CardTitle className="text-marquee_blue-500">Logga in</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <Form {...form}>
@@ -72,11 +69,11 @@ const Login = () => {
                                 name="username"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Username</FormLabel>
-                                        <FormControl>
+                                        <FormLabel className="text-marquee_neutral-900">Användarnamn</FormLabel>
+                                        <FormControl className="text-marquee_red-500">
                                             <Input
                                                 style={{textTransform: "lowercase"}}
-                                                placeholder="enter your username" 
+                                                placeholder="" 
                                                 {...field}
                                             />
                                         </FormControl>
@@ -89,9 +86,9 @@ const Login = () => {
                                 name="password"
                                 render= {({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Password</FormLabel>
-                                        <FormControl>
-                                            <Input type="password" placeholder="enter you password" {...field} />
+                                        <FormLabel className="text-marquee_neutral-900">Lösenord</FormLabel>
+                                        <FormControl className="text-marquee_red-500">
+                                            <Input className="" type="password" placeholder="" {...field} />
                                         </FormControl>
                                         <FormMessage/>
                                     </FormItem>
