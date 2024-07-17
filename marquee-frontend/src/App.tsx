@@ -1,6 +1,6 @@
 //import { useState } from 'react'
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import UserDashboard from "./pages/UserDashboard";
@@ -12,22 +12,30 @@ import { AuthenticationProvider } from "./authcontext/AuthenticationContext";
 
 
 function App() {
+  const userType = window.localStorage.getItem("userType"); // TODO  Implement the setter in login logic
 
   return (
     <AuthenticationProvider>
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<Login/>} />
           <Route path="/" element={<Layout/>}>
             <Route index element={<Home/>}/>
-
             {/* Protected Routes */}
             <Route element={<ProtectedRoute/>}>
-            <Route path="users" element={<UserDashboard/>} />
+              <Route path="logout" element={<Logout/>} />
+              {userType != "Admin" ? (
+                  <>
+                    <Route path="users" element={<Navigate to="/"/>} />
+                  </>
+                ) : (
+                  <>
+                    <Route path="users" element={<UserDashboard/>} />
+                  </>
+              )}
             </Route>
-            
-            <Route path="/login" element={<Login/>} />
-            <Route path="/logout" element={<Logout/>} />
-            <Route path="/error" element={<Error/>} />
+            <Route path="error" element={<Error/>} />
+            <Route path="*" element={<Navigate to="/"/>} />
           </Route>
         </Routes>
       </BrowserRouter>

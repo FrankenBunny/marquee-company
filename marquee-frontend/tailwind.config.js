@@ -18,13 +18,24 @@ module.exports = {
     },
     extend: {
       colors: {
+        marquee_blue: {
+          100: "#CCDBEB",
+          200: "#99B8D7",
+          300: "#6694C3",
+          400: "#3371AF",
+          500: "#004D9B",
+          600: "#003E7C",
+          700: "#002E5D",
+          800: "#00274E",
+          900: "#000F1F"
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#004D9B",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
