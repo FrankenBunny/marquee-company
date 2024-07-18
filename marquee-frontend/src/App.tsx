@@ -20,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login/>} />
           <Route path="/" element={<Layout/>}>
+            <Route path="users" element={<UserDashboard/>} />
             <Route index element={<Home/>}/>
             {/* Protected Routes */}
             <Route element={<ProtectedRoute/>}>
@@ -30,7 +31,7 @@ function App() {
                   </>
                 ) : (
                   <>
-                    <Route path="users" element={<UserDashboard/>} />
+                    
                   </>
               )}
             </Route>
