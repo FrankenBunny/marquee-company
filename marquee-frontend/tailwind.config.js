@@ -2,10 +2,10 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -27,7 +27,7 @@ module.exports = {
           600: "#003E7C",
           700: "#002E5D",
           800: "#00274E",
-          900: "#000F1F"
+          900: "#000F1F",
         },
         marquee_red: {
           100: "#FCD4DD",
@@ -38,7 +38,7 @@ module.exports = {
           600: "#BF2243",
           700: "#8F1932",
           800: "#601122",
-          900: "#300811"
+          900: "#300811",
         },
         marquee_green: {
           100: "#D1F1EC",
@@ -49,7 +49,7 @@ module.exports = {
           600: "#159580",
           700: "#107060",
           800: "#0A4A40",
-          900: "#052520"
+          900: "#052520",
         },
         marquee_yellow: {
           100: "#FDFAE4",
@@ -60,7 +60,7 @@ module.exports = {
           600: "#D7BA0F",
           700: "#A7900B",
           800: "#776708",
-          900: "#181502"
+          900: "#181502",
         },
         marquee_neutral: {
           100: "#F9FBFD",
@@ -71,7 +71,7 @@ module.exports = {
           600: "#4A4B57",
           700: "#3B3C46",
           800: "#2C2D34",
-          900: "#1E1E23"
+          900: "#1E1E23",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -129,4 +129,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
