@@ -1,5 +1,5 @@
 import { LucideUserPlus } from "lucide-react";
-import { Button } from "../button";
+import { Button, buttonVariants } from "../button";
 
 /**
  * The button component can either be with a outline or background, not both.
@@ -17,11 +17,7 @@ const AddUserButton = (props: AddUserButtonProps) => {
     case "primary":
       if (props.background) {
         return (
-          <Button
-            onClick={props.onClick}
-            size="icon"
-            className="bg-marquee_blue-500"
-          >
+          <Button className={buttonVariants({ variant: "outline" })}>
             <LucideUserPlus color="#F9FBFD" />
           </Button>
         );

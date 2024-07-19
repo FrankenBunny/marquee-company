@@ -73,6 +73,10 @@ module.exports = {
           800: "#2C2D34",
           900: "#1E1E23",
         },
+        boxShadow: {
+          right: "4px 0px 6px rgba(0, 0, 0, 0.2)",
+          inset_left: "10px 0px 15px rgba(0, 0, 0, 0.3)",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
