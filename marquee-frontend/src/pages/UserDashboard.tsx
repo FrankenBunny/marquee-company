@@ -9,20 +9,10 @@ import SidebarMenu from "../components/ui/sidebar-menu";
 import { LucideHome, LucideUserMinus, LucideUserPen } from "lucide-react";
 import UserTable from "../components/ui/user-table";
 import { ColumnDef } from "@tanstack/react-table";
-
-type UserdashboardUser = {
-  id: string;
-  name: string;
-  username: string;
-  editurl: string;
-  removeurl: string;
-};
+import UserData, { UserdashboardUser } from "../assets/data/user-data";
+import { Label } from "@radix-ui/react-label";
 
 export const columns: ColumnDef<UserdashboardUser>[] = [
-  {
-    accessorKey: "id",
-    header: "ID",
-  },
   {
     accessorKey: "name",
     header: "Namn",
@@ -30,13 +20,18 @@ export const columns: ColumnDef<UserdashboardUser>[] = [
   {
     accessorKey: "username",
     header: "Användarnamn",
+    cell: ({ row }) => (
+      <div className="overflow-auto whitespace-nowrap max-w-[110px]">
+        <Label className="whitespace-nowrap">{row.getValue("username")}</Label>
+      </div>
+    ),
   },
   {
     accessorKey: "editurl",
     header: "",
     cell: ({ row }) => (
       <a href={row.getValue("editurl")}>
-        <LucideUserPen />
+        <LucideUserPen size={18} />
       </a>
     ),
   },
@@ -45,62 +40,24 @@ export const columns: ColumnDef<UserdashboardUser>[] = [
     header: "",
     cell: ({ row }) => (
       <a href={row.getValue("removeurl")}>
-        <LucideUserMinus />
+        <LucideUserMinus size={18} />
       </a>
     ),
   },
 ];
 
-export const users: UserdashboardUser[] = [
-  {
-    id: "1",
-    name: "Alma",
-    username: "AlmasInlogg",
-    editurl: "test",
-    removeurl: "test2",
-  },
-  {
-    id: "2",
-    name: "Emma",
-    username: "EmmasInlogg",
-    editurl: "test",
-    removeurl: "test2",
-  },
-  {
-    id: "3",
-    name: "Carla",
-    username: "CarlasInlogg",
-    editurl: "test",
-    removeurl: "test2",
-  },
-  {
-    id: "4",
-    name: "Julia",
-    username: "JuliasInlogg",
-    editurl: "test",
-    removeurl: "test2",
-  },
-];
-
 const UserDashboard = () => {
   return (
-    <div className="min-w-screen min-h-screen bg-marquee_blue-100 flex items-center justify-center">
-      <div className="bg-marquee_neutral-100 flex rounded-tr-sm rounded-br-sm">
-        <div className="bg-marquee_blue-500 flex-row items-center pb-3 pt-3 justify-center rounded-tl-sm rounded-bl-sm">
-          <div className="text-marquee_neutral-100 flex flex-col items-center justify-center p-5">
-            <LucideHome size={30} />
-            <h1 className="mb-5">Dashboard</h1>
-          </div>
-          <SidebarMenu />
-        </div>
+    <div className="w-full min-h-screen overflow-auto bg-marquee_blue-300 flex justify-center items-center">
+      <div className="bg-marquee_neutral-100 flex rounded-sm w-fit h-fit p-1">
         <div className="">
-          <Card>
+          <Card className="rounded-none border-none bg-marquee_neutral-100 text-marquee_neutral-900">
             <CardHeader>
               <CardTitle>Användare</CardTitle>
               <CardDescription>Här ser du alla användare.</CardDescription>
             </CardHeader>
-            <CardContent>
-              <UserTable columns={columns} data={users} />
+            <CardContent className="p-1">
+              <UserTable columns={columns} data={UserData} />
             </CardContent>
           </Card>
         </div>
@@ -110,3 +67,28 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
+
+/*
+<div className="w-full min-h-screen bg-marquee_blue-300 flex items-center justify-center">
+<div className="bg-marquee_neutral-100 flex rounded-sm">
+  <div className="bg-marquee_neutral-100 items-center pb-3 pt-3 justify-center rounded-tl-sm rounded-bl-s">
+    <div className="text-marquee_neutral-100 flex flex-col items-center justify-center p-5">
+      <LucideHome size={30} color="#000F1F" />
+      <h1 className="mb-5 text-marquee_neutral-900">Dashboard</h1>
+    </div>
+    <SidebarMenu />
+  </div>
+  <div className="">
+    <Card className="rounded-none border-none">
+      <CardHeader>
+        <CardTitle>Användare</CardTitle>
+        <CardDescription>Här ser du alla användare.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <UserTable columns={columns} data={users} />
+      </CardContent>
+    </Card>
+  </div>
+</div>
+</div>
+*/
