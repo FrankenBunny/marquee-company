@@ -5,8 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import SidebarMenu from "../components/ui/sidebar-menu";
-import { LucideHome, LucideUserMinus, LucideUserPen } from "lucide-react";
+import { LucideUserMinus, LucideUserPen } from "lucide-react";
 import UserTable from "../components/ui/user-table";
 import { ColumnDef } from "@tanstack/react-table";
 import UserData, { UserdashboardUser } from "../assets/data/user-data";

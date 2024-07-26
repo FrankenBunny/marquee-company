@@ -1,4 +1,4 @@
-import { LucideMenu, LucideUserPlus } from "lucide-react";
+import { LucideMenu } from "lucide-react";
 import { Button } from "../button";
 
 /**
