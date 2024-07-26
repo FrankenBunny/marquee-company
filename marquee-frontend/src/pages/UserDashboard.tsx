@@ -66,28 +66,3 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
-
-/*
-<div className="w-full min-h-screen bg-marquee_blue-300 flex items-center justify-center">
-<div className="bg-marquee_neutral-100 flex rounded-sm">
-  <div className="bg-marquee_neutral-100 items-center pb-3 pt-3 justify-center rounded-tl-sm rounded-bl-s">
-    <div className="text-marquee_neutral-100 flex flex-col items-center justify-center p-5">
-      <LucideHome size={30} color="#000F1F" />
-      <h1 className="mb-5 text-marquee_neutral-900">Dashboard</h1>
-    </div>
-    <SidebarMenu />
-  </div>
-  <div className="">
-    <Card className="rounded-none border-none">
-      <CardHeader>
-        <CardTitle>Användare</CardTitle>
-        <CardDescription>Här ser du alla användare.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <UserTable columns={columns} data={users} />
-      </CardContent>
-    </Card>
-  </div>
-</div>
-</div>
-*/
