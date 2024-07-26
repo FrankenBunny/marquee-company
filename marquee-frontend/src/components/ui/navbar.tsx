@@ -41,11 +41,11 @@ const NavigationBar = () => {
   };
 
   return (
-    <div className="fixed t-0 r-0 z-999 w-screen">
+    <div className="fixed t-0 r-0 z-50 w-screen">
       <div
         className={
           menuOpen
-            ? "bg-marquee_neutral-100 w-1/2 h-screen md:w-1/4 lg:w-1/6"
+            ? "bg-marquee_neutral-100 w-1/2 h-screen md:w-1/4 lg:w-1/6 shadow-2xl"
             : ""
         }
       >
