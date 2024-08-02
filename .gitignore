@@ -1,8 +1,74 @@
+# From .NET Core
+.vs/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+marquee-server/marquee-backend/[Dd]ebug/
+marquee-server/marquee-backend/[Dd]ebugPublic/
+marquee-server/marquee-backend/[Rr]elease/
+marquee-server/marquee-backend/[Rr]eleases/
+marquee-server/marquee-backend/x64/
+marquee-server/marquee-backend/x86/
+marquee-server/marquee-backend/bld/
+marquee-server/marquee-backend/[Bb]in/
+marquee-server/marquee-backend/[Oo]bj/
+marquee-server/marquee-backend/[Ll]og/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# DNX
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+*_i.c
+*_p.c
+*_i.h
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# NuGet Packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+# except build/, which is used as an MSBuild target.
+!**/packages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/packages/repositories.config
+# NuGet v3's project.json files produces more ignoreable files
+*.nuget.props
+*.nuget.targets
+
+# END .NET Core
+
 # Compiled class file
 *.class
-
-# vs code
-.vs
 
 # Log file
 *.log

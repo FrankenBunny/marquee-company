@@ -12,6 +12,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const addUserSchema = z.object({
   name: z
@@ -41,21 +44,47 @@ const addUserSchema = z.object({
     .regex(/^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/i, {
       message: "email must be in format abc@abc.com",
     }),
-  password: z.string().min(8).max(256),
+  passwordHash: z.string().min(8).max(256),
 });
 
+type UserFormValues = z.infer<typeof addUserSchema>;
+
 const AddUser = () => {
+  const navigate = useNavigate();
+
   const form = useForm<z.infer<typeof addUserSchema>>({
     resolver: zodResolver(addUserSchema),
     defaultValues: {
       name: "",
       username: "",
+      passwordHash: "",
+      email: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof addUserSchema>) {
-    console.log(values);
-  }
+  const mutation = useMutation({
+    mutationFn: (newUser: UserFormValues) => {
+      return fetch("http://localhost:5019/User", {
+        method: "POST",
+        body: JSON.stringify(newUser),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    },
+  });
+
+  useEffect(() => {
+    if (mutation.isSuccess) {
+      navigate("/users");
+    } else if (mutation.isError) {
+      navigate("/error");
+    }
+  }, [mutation]);
+
+  const onSubmit = (values: z.infer<typeof addUserSchema>) => {
+    mutation.mutate(values);
+  };
 
   return (
     <div className="flex justify-center">
@@ -105,7 +134,23 @@ const AddUser = () => {
                       <FormControl>
                         <Input placeholder="Email" {...field} />
                       </FormControl>
-
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="passwordHash"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="Lösenord"
+                          {...field}
+                        />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}

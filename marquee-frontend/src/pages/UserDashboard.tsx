@@ -8,9 +8,10 @@ import {
 import { LucideUserMinus, LucideUserPen, LucideUserPlus } from "lucide-react";
 import UserTable from "../components/ui/user-table";
 import { ColumnDef } from "@tanstack/react-table";
-import UserData, { UserdashboardUser } from "../assets/data/user-data";
+import { UserdashboardUser } from "../assets/data/user-data";
 import { Label } from "@radix-ui/react-label";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
 
 export const columns: ColumnDef<UserdashboardUser>[] = [
   {
@@ -69,6 +70,15 @@ export const columns: ColumnDef<UserdashboardUser>[] = [
 ];
 
 const UserDashboard = () => {
+  const { isPending, error, data } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: () =>
+      fetch("http://localhost:5019/User").then((res) => res.json()),
+  });
+
+  if (isPending) return "Loading...";
+  if (error) return "An error has occurred: " + error.message;
+
   return (
     <div className="w-full min-h-screen overflow-auto bg-marquee_blue-300 flex justify-center items-center">
       <div className="bg-marquee_neutral-100 flex rounded-sm w-fit h-fit p-1">
@@ -79,7 +89,7 @@ const UserDashboard = () => {
               <CardDescription>Här ser du alla användare.</CardDescription>
             </CardHeader>
             <CardContent className="p-1">
-              <UserTable columns={columns} data={UserData} />
+              <UserTable columns={columns} data={data} />
             </CardContent>
           </Card>
         </div>

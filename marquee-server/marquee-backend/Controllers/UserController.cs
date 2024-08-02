@@ -1,5 +1,5 @@
 ﻿using marquee_backend.Data;
-using marquee_backend.ViewModel.Auth;
+using marquee_backend.Models.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,8 +26,18 @@ namespace marquee_backend.Controllers
                 return NotFound(); 
             }  
             
-            //var userDtos = _
             return Ok(users);
+        }
+
+        [HttpPost(Name = "AddUser")]
+        public async Task<IActionResult> AddUser (User newUser) 
+        {
+            newUser.Id = Guid.NewGuid();
+            // TODO Check that user does not already exist based on restrictions (username?)
+            _databaseContext.Users.Add(newUser);
+            await _databaseContext.SaveChangesAsync();
+
+            return Ok(newUser);
         }
     }
 }
