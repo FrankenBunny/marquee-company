@@ -5,17 +5,11 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import {
-  Link,
-  LucideUserMinus,
-  LucideUserPen,
-  LucideUserPlus,
-} from "lucide-react";
+import { LucideUserMinus, LucideUserPen, LucideUserPlus } from "lucide-react";
 import UserTable from "../components/ui/user-table";
 import { ColumnDef } from "@tanstack/react-table";
 import UserData, { UserdashboardUser } from "../assets/data/user-data";
 import { Label } from "@radix-ui/react-label";
-import AddUserButton from "@/components/ui/buttons/add-user-button";
 import { Button } from "@/components/ui/button";
 
 export const columns: ColumnDef<UserdashboardUser>[] = [
