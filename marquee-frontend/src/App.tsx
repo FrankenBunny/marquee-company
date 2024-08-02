@@ -9,11 +9,7 @@ import ProtectedRoute from "./pages/auth/ProtectedRoute";
 import Error from "./pages/Error";
 import { AuthenticationProvider } from "./authcontext/AuthenticationContext";
 import AddUser from "./pages/admin/AddUser";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
