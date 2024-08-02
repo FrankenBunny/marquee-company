@@ -5,11 +5,12 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import { LucideUserMinus, LucideUserPen } from "lucide-react";
+import { LucideUserMinus, LucideUserPen, LucideUserPlus } from "lucide-react";
 import UserTable from "../components/ui/user-table";
 import { ColumnDef } from "@tanstack/react-table";
 import UserData, { UserdashboardUser } from "../assets/data/user-data";
 import { Label } from "@radix-ui/react-label";
+import { Button } from "@/components/ui/button";
 
 export const columns: ColumnDef<UserdashboardUser>[] = [
   {
@@ -29,18 +30,40 @@ export const columns: ColumnDef<UserdashboardUser>[] = [
     accessorKey: "editurl",
     header: "",
     cell: ({ row }) => (
-      <a href={row.getValue("editurl")}>
-        <LucideUserPen size={18} />
-      </a>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <a href={row.getValue("editurl")}>
+          <LucideUserPen size={18} />
+        </a>
+      </div>
     ),
   },
   {
     accessorKey: "removeurl",
-    header: "",
-    cell: ({ row }) => (
-      <a href={row.getValue("removeurl")}>
-        <LucideUserMinus size={18} />
+    header: () => (
+      <a href="/adduser">
+        <Button className="bg-transparent hover:bg-marquee_green-500 text-marquee_green-500 hover:text-marquee_neutral-100">
+          <LucideUserPlus size={20} />
+        </Button>
       </a>
+    ),
+    cell: ({ row }) => (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <a href={row.getValue("removeurl")}>
+          <LucideUserMinus size={18} />
+        </a>
+      </div>
     ),
   },
 ];
