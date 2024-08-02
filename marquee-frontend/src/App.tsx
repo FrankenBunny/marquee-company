@@ -8,6 +8,7 @@ import Logout from "./pages/auth/Logout";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
 import Error from "./pages/Error";
 import { AuthenticationProvider } from "./authcontext/AuthenticationContext";
+import AddUser from "./pages/admin/AddUser";
 
 function App() {
   const userType = window.localStorage.getItem("userType"); // TODO  Implement the setter in login logic
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Layout />}>
             <Route path="users" element={<UserDashboard />} />
+            <Route path="adduser" element={<AddUser />} />
             <Route index element={<Home />} />
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
@@ -26,6 +28,7 @@ function App() {
               {userType != "Admin" ? (
                 <>
                   <Route path="users" element={<Navigate to="/" />} />
+                  <Route path="adduser" element={<Navigate to="/" />} />
                 </>
               ) : (
                 <></>
