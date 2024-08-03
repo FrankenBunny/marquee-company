@@ -17,7 +17,7 @@ import { useState } from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  data: TData[] | null;
 }
 
 export function UserTable<TData, TValue>({
@@ -29,13 +29,15 @@ export function UserTable<TData, TValue>({
     pageSize: 6,
   });
 
+  const tableData = data || [];
+
   const table = useReactTable({
-    data: data.slice(
+    data: tableData.slice(
       pagination.pageIndex * pagination.pageSize,
       (pagination.pageIndex + 1) * pagination.pageSize
     ),
     columns,
-    pageCount: Math.ceil(data.length / pagination.pageSize),
+    pageCount: Math.ceil(tableData.length / pagination.pageSize),
     state: { pagination },
     onPaginationChange: setPagination,
     manualPagination: true,
@@ -87,7 +89,7 @@ export function UserTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  Inga användare hittades.
                 </TableCell>
               </TableRow>
             )}

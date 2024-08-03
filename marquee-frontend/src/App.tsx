@@ -8,7 +8,7 @@ import Logout from "./pages/auth/Logout";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
 import Error from "./pages/Error";
 import { AuthenticationProvider } from "./authcontext/AuthenticationContext";
-import AddUser from "./pages/admin/AddUser";
+import AddUser from "./pages/admin/User/AddUser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
