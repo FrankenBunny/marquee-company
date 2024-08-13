@@ -62,6 +62,16 @@ The database diagram relating to authentication and authorization within the app
 
 The inventory management system helps workers track and update the inventory. The system allows the users to update the number of items in stock, rented out, and faulty for each item available in the system. Specific users may also edit the list of items themselves, determined by their role.
 
+#### Inventory Database Diagram
+
+|Table|Purpose|Real-world example|
+|---|---|---|
+|Rentable|Items that are available for rental.|A tent.|
+|Part|Distinct parts that make up a rentable item.|Roof, wall, steel beam.|
+|Item|Common parts used in multiple rentable items.|Nails, bolts.|
+|RentableType|Used to categorize the rentable items.|Tents, marquees, decor.|
+|RentableTag|Used to distinguish which common items can be utilized by a rentable item.|ThinEarthNail - rentable can be mounted using the thinner earth nails.|
+
 #### Inventory Functionalities
 
 - [ ] Modify item list for inventory
