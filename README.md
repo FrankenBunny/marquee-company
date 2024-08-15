@@ -60,27 +60,41 @@ The database diagram relating to authentication and authorization within the app
 
 ### Inventory management system
 
-The inventory management system helps workers track and update the inventory. The system allows the users to update the number of items in stock, rented out, and faulty for each item available in the system. Specific users may also edit the list of items themselves, determined by their role.
+The inventory management system helps workers to efficiently track and update inventory. It allows the users to update the item quantity in stock, rented out, and marked faulty for each item available in the system. Additionally, the system supports role-based access control, enabling certain users to edit the inventory items themselves based on their assigned role. The system uses general-purpose objects to accommodate a wide range of items that may be stored in the inventory, ensuring flexibility and scalability.
 
 #### Inventory Database Diagram
 
+![Inventory database diagram](documentation-images/inventory-diagram.png)
 |Table|Purpose|Real-world example|
 |---|---|---|
-|Rentable|Items that are available for rental.|A tent.|
-|Part|Distinct parts that make up a rentable item.|Roof, wall, steel beam.|
-|Item|Common parts used in multiple rentable items.|Nails, bolts.|
-|RentableType|Used to categorize the rentable items.|Tents, marquees, decor.|
-|RentableTag|Used to distinguish which common items can be utilized by a rentable item.|ThinEarthNail - rentable can be mounted using the thinner earth nails.|
+|Rentable|Items that are available for rental.|A 5x5 tent.|
+|Part|Distinct parts that make up a rentable.|Roof, wall, steel beam.|
+|Item|Common parts used in multiple a rentable.|Nails, bolts.|
+|RentableCategory|A category of rentables.|Tents, decor.|
+|RentableTag|A tag for rentables.|New, dirty, faulty.|
 
 #### Inventory Functionalities
 
-- [ ] Modify item list for inventory
-- [ ] Modify number or items in inventory
+|Name|Purpose|Description|
+|---|---|---|
+|Inventory List|Allows users to CRUD the items within list which the inventory is based off of.|A user may add a new tent model to keep inventory of.|
+|Inventory Items|Allows users to adjust the quantity of items in stock and rented out.|A user may adjust the number of tents in stock.|
+|Inventory Categories|Allows the users to CRUD categories which are used to categorize items within the inventory.|A user may categorize an item as a tent.|
+|Inventory Tags|Allows the users to CRUD tags which are used to tag items as for example "dirty", "broken", etc.|A user may tag an item as dirty.|
 
 #### Authorization within Inventory subsystem
 
-|Role|Feature|Description|
-|---|---|---|
+The roles associated with the inventory management system have been listed and described in the table below. The roles are listed so that the ones in the top of the table have the most permissions.
+
+|Role|Description|
+|---|---|
+|Inventory Manager|Has full control over the inventory system, including the ability to add, edit, and remove items, and update item quantities (in stock, rented out, faulty), types, and tags.|
+|Inventory Worker|Responsible for the day-to-day management of inventory. They can update the status of items (in stock, rented out, faulty), record transactions, and report discrepancies using the existing tags.|
+|Inventory Viewer|Has read-only access to the inventory system. They can view items, quantities, and associated tags but cannot make any changes to the inventory data. This role is suitable for users who need to monitor inventory levels and statuses without directly interacting with or modifying the data.|
+
+## Booking management system
+
+The rentable items are constructed using the items in the inventory system, the items may also be created in variants.
 
 ## Potential future features
 
