@@ -2,6 +2,22 @@
 
 Web application for a marquee rental service company.  Developed for internal use to streamline operations for company workers within different departments and workflows.
 
+## Implementation
+
+The implementation of the application has been separated into two main headings, development and deployment.
+
+### Development
+
+|Layer|Technologies|Dependencies|
+|---|---|---|
+|Frontend|React, Vite |Tailwind, ShadCN|
+|Backend|ASP.NET Core|Entity Framework, Swagger|
+|Database|Microsoft SQL Server, Docker||
+
+### Deployment
+
+The web application is hosted by Vercel and is accessible [here](https://marquee-company.vercel.app).
+
 ## Features
 
 The system includes a variety of features designed to streamline operations for company workers. Each feature corresponds to a department or major workflow within the company and consists of multiple sub-features, referred to as functionalities. These functionalities are tailored to support specific tasks within the broader feature. Each listed feature is detailed in their respective sections below. Features currently being implemented or already implemented include:
@@ -27,28 +43,58 @@ The Authentication and Authorization features enables the use of role-based auth
 > Useful information that users should know, even when skimming content. 
 -->
 
-#### Functionalities
+#### AA Functionalities
 
 |Name|Purpose|Description|
 |---|---|---|
 |Login|Allows for the authentication of users.|The user is required to log in when accessing the internal pages.|
 |Authorized routing|Restricts access to certain functionalities by restricting page access to certain roles and claims.|The user is required to posses the correct permissions to access restricted pages.|
+|Tokens|Provides secure token-based authentication and authorization.|JWT (JSON Web Tokens) are used to securely transmit information between parties and verify user identities and permissions.|
 |Role Dashboard|Allows the user to modify the roles within the system.|The user may add, update, and remove roles. The user may also modify a roles' permissions by modifying its claims.|
 |User Dashboard|Allows the user to access the user within the system.|The user may add, update, and remove users within the system. The user may also modify a user's permissions either by modifying their roles or claims.|
 
+#### AA Database Diagram
+
+The database diagram relating to authentication and authorization within the application is shown below.
+![Authentication and Authorization database diagram](documentation-images/aa-diagram.png)
+
 ### Inventory management system
 
-The inventory management system helps workers track and update the inventory. The system allows the users to update the number of items in stock, rented out, and faulty for each item available in the system. Specific users may also edit the list of items themselves, determined by their role.
+The inventory management system helps workers to efficiently track and update inventory. It allows the users to update the item quantity in stock, rented out, and marked faulty for each item available in the system. Additionally, the system supports role-based access control, enabling certain users to edit the inventory items themselves based on their assigned role. The system uses general-purpose objects to accommodate a wide range of items that may be stored in the inventory, ensuring flexibility and scalability.
 
-#### Functionalities
+#### Inventory Database Diagram
 
-- [ ] Modify item list for inventory
-- [ ] Modify number or items in inventory
-
-#### Authorization
-
-|Role|Feature|Description|
+![Inventory database diagram](documentation-images/inventory-diagram.png)
+|Table|Purpose|Real-world example|
 |---|---|---|
+|Rentable|Items that are available for rental.|A 5x5 tent.|
+|Part|Distinct parts that make up a rentable.|Roof, wall, steel beam.|
+|Item|Common parts used in multiple a rentable.|Nails, bolts.|
+|RentableCategory|A category of rentables.|Tents, decor.|
+|RentableTag|A tag for rentables.|New, dirty, faulty.|
+
+#### Inventory Functionalities
+
+|Name|Purpose|Description|
+|---|---|---|
+|Inventory List|Allows users to CRUD the items within list which the inventory is based off of.|A user may add a new tent model to keep inventory of.|
+|Inventory Items|Allows users to adjust the quantity of items in stock and rented out.|A user may adjust the number of tents in stock.|
+|Inventory Categories|Allows the users to CRUD categories which are used to categorize items within the inventory.|A user may categorize an item as a tent.|
+|Inventory Tags|Allows the users to CRUD tags which are used to tag items as for example "dirty", "broken", etc.|A user may tag an item as dirty.|
+
+#### Authorization within Inventory subsystem
+
+The roles associated with the inventory management system have been listed and described in the table below. The roles are listed so that the ones in the top of the table have the most permissions.
+
+|Role|Description|
+|---|---|
+|Inventory Manager|Has full control over the inventory system, including the ability to add, edit, and remove items, and update item quantities (in stock, rented out, faulty), types, and tags.|
+|Inventory Worker|Responsible for the day-to-day management of inventory. They can update the status of items (in stock, rented out, faulty), record transactions, and report discrepancies using the existing tags.|
+|Inventory Viewer|Has read-only access to the inventory system. They can view items, quantities, and associated tags but cannot make any changes to the inventory data. This role is suitable for users who need to monitor inventory levels and statuses without directly interacting with or modifying the data.|
+
+## Booking management system
+
+The rentable items are constructed using the items in the inventory system, the items may also be created in variants.
 
 ## Potential future features
 
