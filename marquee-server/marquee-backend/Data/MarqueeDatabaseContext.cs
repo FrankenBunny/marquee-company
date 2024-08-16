@@ -25,6 +25,16 @@ public class MarqueeDatabaseContext : DbContext
     // Inventory
     public DbSet<Rentable> Rentables { get; set; }
 
+    public DbSet<Part> Parts { get; set; }  
+
+    public DbSet<Item> Items { get; set; }
+
+    public DbSet<RentableCategory> RentableCategories { get; set; }
+
+    public DbSet<RentableTag> RentableTags{ get; set; }
+
+    public DbSet<RentableTagRentable> RentableTagRentables{ get; set; } // Keeps track of rentables tags
+
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
