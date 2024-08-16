@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using marquee_backend.Models.Auth;
+﻿using marquee_backend.Models.Auth;
+using marquee_backend.Models.Inventory;
 using Microsoft.EntityFrameworkCore;
 
 namespace marquee_backend.Data;
 
-public partial class MarqueeDatabaseContext : DbContext
+public class MarqueeDatabaseContext : DbContext
 {
     public MarqueeDatabaseContext()
     {
@@ -16,11 +15,17 @@ public partial class MarqueeDatabaseContext : DbContext
     {
     }
 
-    public virtual DbSet<Role> Roles { get; set; }
+    // Auth
+    public DbSet<Role> Roles { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; }
 
-    public virtual DbSet<UserRole> UserRoles { get; set; }
+    public DbSet<UserRole> UserRoles { get; set; }
+
+    // Inventory
+    public DbSet<Rentable> Rentables { get; set; }
+
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -28,63 +33,17 @@ public partial class MarqueeDatabaseContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Role>(entity =>
-        {
-            entity.ToTable("role");
+        // Auth
+        new RoleEntityTypeConfiguration().Configure(modelBuilder.Entity<Role>());
+        new UserEntityTypeConfiguration().Configure(modelBuilder.Entity<User>());
+        new UserRoleEntityTypeConfiguration().Configure(modelBuilder.Entity<UserRole>());
 
-            entity.HasIndex(e => e.Name, "unique_name").IsUnique();
-
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
-            entity.Property(e => e.Name)
-                .HasMaxLength(30)
-                .HasColumnName("name");
-        });
-
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.ToTable("user");
-
-            entity.HasIndex(e => e.Email, "unique_email").IsUnique();
-
-            entity.HasIndex(e => e.Username, "unique_username").IsUnique();
-
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
-            entity.Property(e => e.Email)
-                .HasMaxLength(256)
-                .HasColumnName("email");
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .HasColumnName("name");
-            entity.Property(e => e.PasswordHash).HasColumnName("password_hash");
-            entity.Property(e => e.Username)
-                .HasMaxLength(20)
-                .HasColumnName("username");
-        });
-
-        modelBuilder.Entity<UserRole>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("user_role");
-
-            entity.Property(e => e.RoleId).HasColumnName("role_id");
-            entity.Property(e => e.UserId).HasColumnName("user_id");
-
-            entity.HasOne(d => d.Role).WithMany()
-                .HasForeignKey(d => d.RoleId)
-                .HasConstraintName("FK_user_role_role_id");
-
-            entity.HasOne(d => d.User).WithMany()
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("fk_user_role_user_id");
-        });
-
-        OnModelCreatingPartial(modelBuilder);
+        // Inventory
+        new RentableEntityTypeConfiguration().Configure(modelBuilder.Entity<Rentable>());
+        new PartEntityTypeConfiguration().Configure(modelBuilder.Entity<Part>());
+        new ItemEntityTypeConfiguration().Configure(modelBuilder.Entity<Item>());
+        new RentableCategoryEntityTypeConfiguration().Configure(modelBuilder.Entity<RentableCategory>());
+        new RentableTagEntityTypeConfiguration().Configure(modelBuilder.Entity<RentableTag>());
+        new RentableTagRentableEntityTypeConfiguration().Configure(modelBuilder.Entity<RentableTagRentable>());
     }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
