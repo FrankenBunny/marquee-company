@@ -7,6 +7,9 @@
 *.userosscache
 *.sln.docstates
 
+# config tiles
+.config
+
 # Build results
 marquee-server/marquee-backend/[Dd]ebug/
 marquee-server/marquee-backend/[Dd]ebugPublic/

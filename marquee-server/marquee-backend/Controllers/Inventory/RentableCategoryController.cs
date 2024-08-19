@@ -20,40 +20,47 @@ namespace marquee_backend.Controllers.Inventory
     {
         private readonly MarqueeDatabaseContext _databaseContext;
 
-        public RentableCategoryController (MarqueeDatabaseContext databaseContext)
+        public RentableCategoryController(MarqueeDatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
         }
 
-
         [HttpPost]
-        public async Task<ActionResult> AddRentableCategory (RentableCategory newRentableCategory) 
+        public async Task<ActionResult> AddRentableCategory(RentableCategory newRentableCategory)
         {
             newRentableCategory.Id = Guid.NewGuid();
-            
-            var taken_title = _databaseContext.RentableCategories.Where(item => item.Title == newRentableCategory.Title);
+
+            var taken_title = _databaseContext.RentableCategories.Where(item =>
+                item.Title == newRentableCategory.Title
+            );
 
             if (taken_title != null)
-              return BadRequest();
+                return BadRequest();
 
             _databaseContext.RentableCategories.Add(newRentableCategory);
             await _databaseContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetRentableCategory), new {id = newRentableCategory.Id}, newRentableCategory);
+            return CreatedAtAction(
+                nameof(GetRentableCategory),
+                new { id = newRentableCategory.Id },
+                newRentableCategory
+            );
         }
-
 
         [HttpGet("{rentableCategoryId}")]
-        public async Task<ActionResult<RentableCategory>> GetRentableCategory (Guid rentableCategoryId)
+        public async Task<ActionResult<RentableCategory>> GetRentableCategory(
+            Guid rentableCategoryId
+        )
         {
-          var rentableCategories = await _databaseContext.RentableCategories.FindAsync(rentableCategoryId);
+            var rentableCategories = await _databaseContext.RentableCategories.FindAsync(
+                rentableCategoryId
+            );
 
-          if (rentableCategories == null)
-            return NotFound();
+            if (rentableCategories == null)
+                return NotFound();
 
-          return rentableCategories;
+            return rentableCategories;
         }
-
 
         [HttpGet]
         public async Task<ActionResult<List<RentableCategory>>> GetRentableCategory()
@@ -62,51 +69,56 @@ namespace marquee_backend.Controllers.Inventory
 
             if (rentableCategories == null || !rentableCategories.Any())
             {
-                return NotFound(); 
-            }  
-            
+                return NotFound();
+            }
+
             return rentableCategories;
         }
 
-
-        [HttpPut("{rentableCategoryId}", Name = "EditRentableCategory")]
-        public async Task<IActionResult> EditRentableCategory (Guid rentableCategoryId, RentableCategory updatedRentableCategory)
+        [HttpPut("{rentableCategoryId}")]
+        public async Task<IActionResult> EditRentableCategory(
+            Guid rentableCategoryId,
+            RentableCategory updatedRentableCategory
+        )
         {
-          if (rentableCategoryId != updatedRentableCategory.Id)
-            return BadRequest();
+            if (rentableCategoryId != updatedRentableCategory.Id)
+                return BadRequest();
 
-          _databaseContext.Entry(updatedRentableCategory).State = EntityState.Modified;
+            _databaseContext.Entry(updatedRentableCategory).State = EntityState.Modified;
 
-          try
-          {
-            await _databaseContext.SaveChangesAsync();
-          }
-          catch (DbUpdateConcurrencyException)
-          {
-            var rentableCategories = await _databaseContext.RentableCategories.FindAsync(rentableCategoryId);
-            if (rentableCategories == null)
-              return NotFound();
-            else
+            try
             {
-              throw;
+                await _databaseContext.SaveChangesAsync();
             }
-          }
+            catch (DbUpdateConcurrencyException)
+            {
+                var rentableCategories = await _databaseContext.RentableCategories.FindAsync(
+                    rentableCategoryId
+                );
+                if (rentableCategories == null)
+                    return NotFound();
+                else
+                {
+                    throw;
+                }
+            }
 
-          return NoContent();
+            return NoContent();
         }
 
-
         [HttpDelete]
-        public async Task<IActionResult> RemoveRentableCategory (Guid rentableCategoryId)
+        public async Task<IActionResult> RemoveRentableCategory(Guid rentableCategoryId)
         {
-          var toBeRemoved = await _databaseContext.RentableCategories.FindAsync(rentableCategoryId);
-          if (toBeRemoved == null)
-            return NotFound();
+            var toBeRemoved = await _databaseContext.RentableCategories.FindAsync(
+                rentableCategoryId
+            );
+            if (toBeRemoved == null)
+                return NotFound();
 
-          _databaseContext.RentableCategories.Remove(toBeRemoved);
-          await _databaseContext.SaveChangesAsync();
+            _databaseContext.RentableCategories.Remove(toBeRemoved);
+            await _databaseContext.SaveChangesAsync();
 
-          return NoContent();
+            return NoContent();
         }
     }
 }
