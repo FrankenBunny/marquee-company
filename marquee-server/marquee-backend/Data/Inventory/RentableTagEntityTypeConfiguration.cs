@@ -6,22 +6,22 @@ public class RentableTagEntityTypeConfiguration : IEntityTypeConfiguration<Renta
 {
     public void Configure(EntityTypeBuilder<RentableTag> modelBuilder)
     {
-      modelBuilder.ToTable("rentable_tag");
+        modelBuilder.ToTable("rentable_tag");
 
-      modelBuilder.HasIndex(e => e.Title, "unique_name").IsUnique();
+        modelBuilder.HasIndex(e => e.Title, "unique_name").IsUnique();
 
-      modelBuilder.Property(e => e.Id)
-        .ValueGeneratedNever()
-        .HasColumnName("id");
+        modelBuilder.Property(e => e.Id).ValueGeneratedNever().HasColumnName("id");
 
-      modelBuilder.Property(e => e.Title)
-        .HasMaxLength(30)
-        .IsRequired(true)
-        .HasColumnName("title");
+        modelBuilder
+            .Property(e => e.Title)
+            .HasMaxLength(30)
+            .IsRequired(true)
+            .HasColumnName("title");
 
-      modelBuilder.Property(e => e.Description)
-        .HasMaxLength(200)
-        .IsRequired(true)
-        .HasColumnName("description");
+        modelBuilder
+            .Property(e => e.Description)
+            .HasMaxLength(200)
+            .IsRequired(true)
+            .HasColumnName("description");
     }
 }

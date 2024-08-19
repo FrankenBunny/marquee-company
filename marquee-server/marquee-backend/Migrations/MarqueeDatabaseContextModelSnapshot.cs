@@ -178,6 +178,8 @@ namespace marquee_backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Type");
+
                     b.HasIndex(new[] { "Title" }, "unique_name")
                         .IsUnique();
 
@@ -238,6 +240,10 @@ namespace marquee_backend.Migrations
 
             modelBuilder.Entity("marquee_backend.Models.Inventory.RentableTagRentable", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("RentableId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("rentable_id");
@@ -246,9 +252,13 @@ namespace marquee_backend.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("rentable_tag_id");
 
+                    b.HasKey("Id");
+
                     b.HasIndex("RentableId");
 
-                    b.HasIndex("RentableTagId");
+                    b.HasIndex("RentableTagId", "RentableId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_rentable_tag_rentable_unique");
 
                     b.ToTable("rentable_tag_rentable", (string)null);
                 });
@@ -282,6 +292,15 @@ namespace marquee_backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_part_rentable_id");
+                });
+
+            modelBuilder.Entity("marquee_backend.Models.Inventory.Rentable", b =>
+                {
+                    b.HasOne("marquee_backend.Models.Inventory.RentableCategory", null)
+                        .WithMany()
+                        .HasForeignKey("Type")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("fk_rentable_category_id");
                 });
 
             modelBuilder.Entity("marquee_backend.Models.Inventory.RentableTagRentable", b =>

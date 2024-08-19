@@ -10,6 +10,13 @@
 # config tiles
 .config
 
+# config tiles
+.config
+
+
+# Migrations
+marquee-server/marquee-backend/Migrations
+
 # Build results
 marquee-server/marquee-backend/[Dd]ebug/
 marquee-server/marquee-backend/[Dd]ebugPublic/
