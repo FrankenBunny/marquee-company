@@ -6,22 +6,22 @@ public class RentableCategoryEntityTypeConfiguration : IEntityTypeConfiguration<
 {
     public void Configure(EntityTypeBuilder<RentableCategory> modelBuilder)
     {
-      modelBuilder.ToTable("rentable_category");
+        modelBuilder.ToTable("rentable_category");
 
-      modelBuilder.HasIndex(e => e.Title, "unique_name").IsUnique();
+        modelBuilder.HasIndex(e => e.Title, "unique_name").IsUnique();
 
-      modelBuilder.Property(e => e.Id)
-        .ValueGeneratedNever()
-        .HasColumnName("id");
+        modelBuilder.Property(e => e.Id).ValueGeneratedNever().HasColumnName("id");
 
-      modelBuilder.Property(e => e.Title)
-        .HasMaxLength(30)
-        .IsRequired(true)
-        .HasColumnName("title");
+        modelBuilder
+            .Property(e => e.Title)
+            .HasMaxLength(30)
+            .IsRequired(true)
+            .HasColumnName("title");
 
-      modelBuilder.Property(e => e.Description)
-        .HasMaxLength(200)
-        .IsRequired(true)
-        .HasColumnName("description");
+        modelBuilder
+            .Property(e => e.Description)
+            .HasMaxLength(200)
+            .IsRequired(true)
+            .HasColumnName("description");
     }
 }

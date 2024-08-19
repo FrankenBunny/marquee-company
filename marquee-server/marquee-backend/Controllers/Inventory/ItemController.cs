@@ -20,40 +20,37 @@ namespace marquee_backend.Controllers.Inventory
     {
         private readonly MarqueeDatabaseContext _databaseContext;
 
-        public ItemController (MarqueeDatabaseContext databaseContext)
+        public ItemController(MarqueeDatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
         }
 
-
         [HttpPost]
-        public async Task<ActionResult> AddItem (Item newItem) 
+        public async Task<ActionResult> AddItem(Item newItem)
         {
             newItem.Id = Guid.NewGuid();
 
             var taken_title = _databaseContext.Items.Where(item => item.Title == newItem.Title);
 
             if (taken_title != null)
-              return BadRequest();
+                return BadRequest();
 
             _databaseContext.Items.Add(newItem);
             await _databaseContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetItem), new {id = newItem.Id}, newItem);
+            return CreatedAtAction(nameof(GetItem), new { id = newItem.Id }, newItem);
         }
-
 
         [HttpGet("{itemId}")]
-        public async Task<ActionResult<Item>> GetItem (Guid itemId)
+        public async Task<ActionResult<Item>> GetItem(Guid itemId)
         {
-          var item = await _databaseContext.Items.FindAsync(itemId);
+            var item = await _databaseContext.Items.FindAsync(itemId);
 
-          if (item == null)
-            return NotFound();
+            if (item == null)
+                return NotFound();
 
-          return item;
+            return item;
         }
-
 
         [HttpGet]
         public async Task<ActionResult<List<Item>>> GetItems()
@@ -62,51 +59,49 @@ namespace marquee_backend.Controllers.Inventory
 
             if (items == null || !items.Any())
             {
-                return NotFound(); 
-            }  
-            
+                return NotFound();
+            }
+
             return items;
         }
 
-
         [HttpPut("{itemId}")]
-        public async Task<IActionResult> EditItem (Guid itemId, Item updatedItem)
+        public async Task<IActionResult> EditItem(Guid itemId, Item updatedItem)
         {
-          if (itemId != updatedItem.Id)
-            return BadRequest();
+            if (itemId != updatedItem.Id)
+                return BadRequest();
 
-          _databaseContext.Entry(updatedItem).State = EntityState.Modified;
+            _databaseContext.Entry(updatedItem).State = EntityState.Modified;
 
-          try
-          {
-            await _databaseContext.SaveChangesAsync();
-          }
-          catch (DbUpdateConcurrencyException)
-          {
-            var item = await _databaseContext.Items.FindAsync(itemId);
-            if (item == null)
-              return NotFound();
-            else
+            try
             {
-              throw;
+                await _databaseContext.SaveChangesAsync();
             }
-          }
+            catch (DbUpdateConcurrencyException)
+            {
+                var item = await _databaseContext.Items.FindAsync(itemId);
+                if (item == null)
+                    return NotFound();
+                else
+                {
+                    throw;
+                }
+            }
 
-          return NoContent();
+            return NoContent();
         }
 
-
         [HttpDelete]
-        public async Task<IActionResult> RemoveItem (Guid itemId)
+        public async Task<IActionResult> RemoveItem(Guid itemId)
         {
-          var toBeRemoved = await _databaseContext.Items.FindAsync(itemId);
-          if (toBeRemoved == null)
-            return NotFound();
+            var toBeRemoved = await _databaseContext.Items.FindAsync(itemId);
+            if (toBeRemoved == null)
+                return NotFound();
 
-          _databaseContext.Items.Remove(toBeRemoved);
-          await _databaseContext.SaveChangesAsync();
+            _databaseContext.Items.Remove(toBeRemoved);
+            await _databaseContext.SaveChangesAsync();
 
-          return NoContent();
+            return NoContent();
         }
     }
 }
