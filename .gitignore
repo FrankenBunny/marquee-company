@@ -10,6 +10,9 @@
 # config tiles
 .config
 
+# config tiles
+.config
+
 
 # Migrations
 marquee-server/marquee-backend/Migrations
