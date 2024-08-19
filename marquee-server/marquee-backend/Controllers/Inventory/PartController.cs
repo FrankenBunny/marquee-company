@@ -21,108 +21,103 @@ namespace marquee_backend.Controllers.Inventory
     {
         private readonly MarqueeDatabaseContext _databaseContext;
 
-
-        public PartController (MarqueeDatabaseContext databaseContext)
+        public PartController(MarqueeDatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
         }
 
-
         [HttpPost]
-        public async Task<ActionResult> AddPart (Part newPart) 
+        public async Task<ActionResult> AddPart(Part newPart)
         {
             newPart.Id = Guid.NewGuid();
 
             var taken_title = _databaseContext.Parts.Where(item => item.Title == newPart.Title);
 
             if (taken_title != null)
-              return BadRequest();
+                return BadRequest();
 
             _databaseContext.Parts.Add(newPart);
             await _databaseContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetPart), new {id = newPart.Id}, newPart);
+            return CreatedAtAction(nameof(GetPart), new { id = newPart.Id }, newPart);
         }
-
 
         [HttpGet("{partId}")]
-        public async Task<ActionResult<Part>> GetPart (Guid partId)
+        public async Task<ActionResult<Part>> GetPart(Guid partId)
         {
-          var part = await _databaseContext.Parts.FindAsync(partId);
+            var part = await _databaseContext.Parts.FindAsync(partId);
 
-          if (part == null)
-            return NotFound();
+            if (part == null)
+                return NotFound();
 
-          return part;
+            return part;
         }
 
-
         [HttpGet]
-        public async Task<ActionResult<List<Part>>> GetParts ()
+        public async Task<ActionResult<List<Part>>> GetParts()
         {
             var parts = await _databaseContext.Parts.ToListAsync();
 
             if (parts == null || !parts.Any())
             {
-                return NotFound(); 
-            }  
-            
+                return NotFound();
+            }
+
             return parts;
         }
 
-
         [HttpGet("partsByRentableId{rentableId}")]
-        public async Task<ActionResult<List<Part>>> GetPartsByRentableId (Guid rentableId)
+        public async Task<ActionResult<List<Part>>> GetPartsByRentableId(Guid rentableId)
         {
-            var parts = await _databaseContext.Parts.Where(part => part.RentableId == rentableId).ToListAsync();
+            var parts = await _databaseContext
+                .Parts.Where(part => part.RentableId == rentableId)
+                .ToListAsync();
 
             if (parts == null || !parts.Any())
             {
-                return NotFound(); 
-            }  
-            
+                return NotFound();
+            }
+
             return parts;
         }
 
-
         [HttpPut("{partId}")]
-        public async Task<IActionResult> EditPart (Guid partId, Part updatedPart)
+        public async Task<IActionResult> EditPart(Guid partId, Part updatedPart)
         {
-          if (partId != updatedPart.Id)
-            return BadRequest();
+            if (partId != updatedPart.Id)
+                return BadRequest();
 
-          _databaseContext.Entry(updatedPart).State = EntityState.Modified;
+            _databaseContext.Entry(updatedPart).State = EntityState.Modified;
 
-          try
-          {
-            await _databaseContext.SaveChangesAsync();
-          }
-          catch (DbUpdateConcurrencyException)
-          {
-            var part = await _databaseContext.Parts.FindAsync(partId);
-            if (part == null)
-              return NotFound();
-            else
+            try
             {
-              throw;
+                await _databaseContext.SaveChangesAsync();
             }
-          }
+            catch (DbUpdateConcurrencyException)
+            {
+                var part = await _databaseContext.Parts.FindAsync(partId);
+                if (part == null)
+                    return NotFound();
+                else
+                {
+                    throw;
+                }
+            }
 
-          return NoContent();
+            return NoContent();
         }
 
-
         [HttpDelete]
-        public async Task<IActionResult> RemovePart (Guid partId)
+        public async Task<IActionResult> RemovePart(Guid partId)
         {
-          var toBeRemoved = await _databaseContext.Parts.FindAsync(partId);
-          if (toBeRemoved == null)
-            return NotFound();
+            var toBeRemoved = await _databaseContext.Parts.FindAsync(partId);
+            if (toBeRemoved == null)
+                return NotFound();
 
-          _databaseContext.Parts.Remove(toBeRemoved);
-          await _databaseContext.SaveChangesAsync();
+            _databaseContext.Parts.Remove(toBeRemoved);
+            await _databaseContext.SaveChangesAsync();
 
-          return NoContent();
+            return NoContent();
         }
     }
 }
