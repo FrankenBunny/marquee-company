@@ -10,6 +10,9 @@ import Error from "./pages/Error";
 import { AuthenticationProvider } from "./authcontext/AuthenticationContext";
 import AddUser from "./pages/admin/User/AddUser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import InventoryDashboard from "./pages/inventory/InventoryDashboard";
+import CategoryDashboard from "./pages/inventory/CategoryPages/CategoryDashboard";
+import CategoryDetails from "./pages/inventory/CategoryPages/CategoryDetails";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +28,13 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route path="users" element={<UserDashboard />} />
               <Route path="adduser" element={<AddUser />} />
+              <Route path="inventory">
+                <Route index element={<InventoryDashboard />} />
+                <Route path="category">
+                  <Route index element={<CategoryDashboard />} />
+                  <Route path=":categoryId" element={<CategoryDetails />} />
+                </Route>
+              </Route>
               <Route index element={<Home />} />
               {/* Protected Routes */}
               <Route element={<ProtectedRoute />}>
