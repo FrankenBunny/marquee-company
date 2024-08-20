@@ -32,17 +32,21 @@ namespace marquee_backend.Controllers.Inventory
         {
             newRentable.Id = Guid.NewGuid();
 
-            var taken_title = _databaseContext.Rentables.Where(item =>
+            var taken_title = await _databaseContext.Rentables.FirstOrDefaultAsync(item =>
                 item.Title == newRentable.Title
             );
 
             if (taken_title != null)
-                return BadRequest();
+                return BadRequest("Title has already been taken: " + newRentable.Title);
 
             _databaseContext.Rentables.Add(newRentable);
             await _databaseContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetRentable), new { id = newRentable.Id }, newRentable);
+            return CreatedAtAction(
+                nameof(GetRentable),
+                new { rentableId = newRentable.Id },
+                newRentable
+            );
         }
 
         [HttpGet("{rentableId}")]
@@ -51,7 +55,7 @@ namespace marquee_backend.Controllers.Inventory
             var rentable = await _databaseContext.Rentables.FindAsync(rentableId);
 
             if (rentable == null)
-                return NotFound();
+                return NotFound("There is no item in the table matching ID: " + rentableId);
 
             return rentable;
         }
@@ -63,7 +67,7 @@ namespace marquee_backend.Controllers.Inventory
 
             if (rentables == null || !rentables.Any())
             {
-                return NotFound();
+                return NotFound("Table is empty.");
             }
 
             return rentables;
@@ -88,7 +92,12 @@ namespace marquee_backend.Controllers.Inventory
         public async Task<IActionResult> EditRentable(Guid rentableId, Rentable updatedRentable)
         {
             if (rentableId != updatedRentable.Id)
-                return BadRequest();
+                return BadRequest(
+                    "ID's do not match. Given ID: "
+                        + rentableId
+                        + " Object ID: "
+                        + updatedRentable.Id
+                );
 
             _databaseContext.Entry(updatedRentable).State = EntityState.Modified;
 
@@ -100,7 +109,7 @@ namespace marquee_backend.Controllers.Inventory
             {
                 var rentable = await _databaseContext.Rentables.FindAsync(rentableId);
                 if (rentable == null)
-                    return NotFound();
+                    return NotFound("No item matches the ID: " + rentableId);
                 else
                 {
                     throw;
@@ -115,7 +124,7 @@ namespace marquee_backend.Controllers.Inventory
         {
             var toBeRemoved = await _databaseContext.Rentables.FindAsync(rentableId);
             if (toBeRemoved == null)
-                return NotFound();
+                return NotFound("No item matches the ID: " + rentableId);
 
             _databaseContext.Rentables.Remove(toBeRemoved);
             await _databaseContext.SaveChangesAsync();

@@ -7,10 +7,10 @@ namespace marquee_backend.Models.Inventory;
  * A Rentable is required to have an ID and Title, and can also have
  * a note and type.
  **/
-public partial class Rentable {
-  [SwaggerSchema(ReadOnly = true)]
-  public Guid Id { get; set; }
-  public String Title { get; set; } = null!;
-  public String? Note { get; set; }
-  public Guid? Type {get; set;}
+public partial class Rentable
+{
+    public Guid Id { get; set; }
+    public String Title { get; set; } = null!;
+    public String? Note { get; set; }
+    public Guid? Type { get; set; }
 }
