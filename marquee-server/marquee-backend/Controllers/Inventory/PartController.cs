@@ -31,15 +31,17 @@ namespace marquee_backend.Controllers.Inventory
         {
             newPart.Id = Guid.NewGuid();
 
-            var taken_title = _databaseContext.Parts.Where(item => item.Title == newPart.Title);
+            var taken_title = await _databaseContext.Parts.FirstOrDefaultAsync(item =>
+                item.Title == newPart.Title
+            );
 
             if (taken_title != null)
-                return BadRequest();
+                return BadRequest("Title has already been taken: " + newPart.Title);
 
             _databaseContext.Parts.Add(newPart);
             await _databaseContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetPart), new { id = newPart.Id }, newPart);
+            return CreatedAtAction(nameof(GetPart), new { partId = newPart.Id }, newPart);
         }
 
         [HttpGet("{partId}")]
@@ -48,7 +50,7 @@ namespace marquee_backend.Controllers.Inventory
             var part = await _databaseContext.Parts.FindAsync(partId);
 
             if (part == null)
-                return NotFound();
+                return NotFound("There is no item in the table matching ID: " + partId);
 
             return part;
         }
@@ -75,7 +77,9 @@ namespace marquee_backend.Controllers.Inventory
 
             if (parts == null || !parts.Any())
             {
-                return NotFound();
+                return NotFound(
+                    "There is no item in the table matching the rentable ID: " + rentableId
+                );
             }
 
             return parts;
@@ -85,7 +89,9 @@ namespace marquee_backend.Controllers.Inventory
         public async Task<IActionResult> EditPart(Guid partId, Part updatedPart)
         {
             if (partId != updatedPart.Id)
-                return BadRequest();
+                return BadRequest(
+                    "ID's do not match. Given ID: " + partId + " Object ID: " + updatedPart.Id
+                );
 
             _databaseContext.Entry(updatedPart).State = EntityState.Modified;
 
@@ -97,7 +103,7 @@ namespace marquee_backend.Controllers.Inventory
             {
                 var part = await _databaseContext.Parts.FindAsync(partId);
                 if (part == null)
-                    return NotFound();
+                    return NotFound("No item matches the ID: " + partId);
                 else
                 {
                     throw;
@@ -112,7 +118,7 @@ namespace marquee_backend.Controllers.Inventory
         {
             var toBeRemoved = await _databaseContext.Parts.FindAsync(partId);
             if (toBeRemoved == null)
-                return NotFound();
+                return NotFound("No item matches the ID: " + partId);
 
             _databaseContext.Parts.Remove(toBeRemoved);
             await _databaseContext.SaveChangesAsync();
