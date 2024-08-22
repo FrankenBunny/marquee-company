@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "AutoMapper/13.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Azure.Core/1.35.0": {
         "type": "package",
         "dependencies": {
@@ -470,6 +486,22 @@
         },
         "build": {
           "build/net8.0/Microsoft.EntityFrameworkCore.Design.props": {}
+        }
+      },
+      "Microsoft.EntityFrameworkCore.InMemory/8.0.8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "8.0.8"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/8.0.8": {
@@ -1596,10 +1628,50 @@
             "rid": "win"
           }
         }
+      },
+      "MarqueeBackend.DataService/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "MarqueeBackend.Entities": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "8.0.8",
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8"
+        },
+        "compile": {
+          "bin/placeholder/MarqueeBackend.DataService.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MarqueeBackend.DataService.dll": {}
+        }
+      },
+      "MarqueeBackend.Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/MarqueeBackend.Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MarqueeBackend.Entities.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "AutoMapper/13.0.1": {
+      "sha512": "/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+      "type": "package",
+      "path": "automapper/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.13.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/net6.0/AutoMapper.dll",
+        "lib/net6.0/AutoMapper.xml"
+      ]
+    },
     "Azure.Core/1.35.0": {
       "sha512": "hENcx03Jyuqv05F4RBEPbxz29UrM3Nbhnr6Wl6NQpoU9BCIbL3XLentrxDCTrH54NLS11Exxi/o8MYgT/cnKFA==",
       "type": "package",
@@ -2332,6 +2404,21 @@
         "lib/net8.0/Microsoft.EntityFrameworkCore.Design.xml",
         "microsoft.entityframeworkcore.design.8.0.8.nupkg.sha512",
         "microsoft.entityframeworkcore.design.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/8.0.8": {
+      "sha512": "B4r7MGPHUjuIdoI4dMvGFWK2vIT1svIgR3fITc+62ZHmbkRS+gq0mZ8BU9CXM388MfD5Tsn5KXJjWeu+b9gLlg==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.inmemory/8.0.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "lib/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/net8.0/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "microsoft.entityframeworkcore.inmemory.8.0.8.nupkg.sha512",
+        "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/8.0.8": {
@@ -4505,53 +4592,82 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "MarqueeBackend.DataService/1.0.0": {
+      "type": "project",
+      "path": "../MarqueeBackend.DataService/MarqueeBackend.DataService.csproj",
+      "msbuildProject": "../MarqueeBackend.DataService/MarqueeBackend.DataService.csproj"
+    },
+    "MarqueeBackend.Entities/1.0.0": {
+      "type": "project",
+      "path": "../MarqueeBackend.Entities/MarqueeBackend.Entities.csproj",
+      "msbuildProject": "../MarqueeBackend.Entities/MarqueeBackend.Entities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "AutoMapper >= 13.0.1",
+      "MarqueeBackend.DataService >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.8",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.8",
+      "Microsoft.EntityFrameworkCore.InMemory >= 8.0.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.8",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
   "packageFolders": {
-    "/home/valpen/.nuget/packages/": {}
+    "C:\\Users\\julia\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/mnt/e/software-projects/marquee-company/marquee-backend/MarqueeBackend.Api/MarqueeBackend.Api.csproj",
+      "projectUniqueName": "E:\\software-projects\\marquee-company\\marquee-backend\\MarqueeBackend.Api\\MarqueeBackend.Api.csproj",
       "projectName": "MarqueeBackend.Api",
-      "projectPath": "/mnt/e/software-projects/marquee-company/marquee-backend/MarqueeBackend.Api/MarqueeBackend.Api.csproj",
-      "packagesPath": "/home/valpen/.nuget/packages/",
-      "outputPath": "/mnt/e/software-projects/marquee-company/marquee-backend/MarqueeBackend.Api/obj/",
+      "projectPath": "E:\\software-projects\\marquee-company\\marquee-backend\\MarqueeBackend.Api\\MarqueeBackend.Api.csproj",
+      "packagesPath": "C:\\Users\\julia\\.nuget\\packages\\",
+      "outputPath": "E:\\software-projects\\marquee-company\\marquee-backend\\MarqueeBackend.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/valpen/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\julia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\software-projects\\marquee-company\\marquee-backend\\MarqueeBackend.DataService\\MarqueeBackend.DataService.csproj": {
+              "projectPath": "E:\\software-projects\\marquee-company\\marquee-backend\\MarqueeBackend.DataService\\MarqueeBackend.DataService.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[13.0.1, )"
+          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[8.0.8, )"
@@ -4559,6 +4675,10 @@
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
+            "target": "Package",
+            "version": "[8.0.8, )"
+          },
+          "Microsoft.EntityFrameworkCore.InMemory": {
             "target": "Package",
             "version": "[8.0.8, )"
           },
@@ -4590,7 +4710,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

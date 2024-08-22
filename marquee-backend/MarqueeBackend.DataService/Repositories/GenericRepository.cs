@@ -1,9 +1,9 @@
-using dotnetFullstack.DataService.Data;
-using dotnetFullstack.DataService.Repositories.Interfaces;
+using MarqueeBackend.DataService.Data;
+using MarqueeBackend.DataService.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace dotnetFullstack.DataService.Repositories;
+namespace MarqueeBackend.DataService.Repositories;
 
 public class GenericRepository<T> : IGenericRepository<T>
     where T : class

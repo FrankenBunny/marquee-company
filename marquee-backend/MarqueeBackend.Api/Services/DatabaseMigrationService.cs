@@ -1,7 +1,7 @@
-using dotnetFullstack.DataService.Data;
+using MarqueeBackend.DataService.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace dotnetFullstack.Api.Services;
+namespace MarqueeBackend.Api.Services;
 
 public class DatabaseMigrationService
 {

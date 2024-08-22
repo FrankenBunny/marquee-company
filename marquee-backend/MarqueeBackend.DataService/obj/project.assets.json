@@ -1502,6 +1502,16 @@
             "rid": "win"
           }
         }
+      },
+      "MarqueeBackend.Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/MarqueeBackend.Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MarqueeBackend.Entities.dll": {}
+        }
       }
     }
   },
@@ -4096,10 +4106,16 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "MarqueeBackend.Entities/1.0.0": {
+      "type": "project",
+      "path": "../MarqueeBackend.Entities/MarqueeBackend.Entities.csproj",
+      "msbuildProject": "../MarqueeBackend.Entities/MarqueeBackend.Entities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "MarqueeBackend.Entities >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 8.0.8",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.8",
@@ -4107,36 +4123,48 @@
     ]
   },
   "packageFolders": {
-    "/home/valpen/.nuget/packages/": {}
+    "C:\\Users\\julia\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/mnt/e/software-projects/marquee-company/marquee-backend/MarqueeBackend.DataService/MarqueeBackend.DataService.csproj",
+      "projectUniqueName": "E:\\software-projects\\marquee-company\\marquee-backend\\MarqueeBackend.DataService\\MarqueeBackend.DataService.csproj",
       "projectName": "MarqueeBackend.DataService",
-      "projectPath": "/mnt/e/software-projects/marquee-company/marquee-backend/MarqueeBackend.DataService/MarqueeBackend.DataService.csproj",
-      "packagesPath": "/home/valpen/.nuget/packages/",
-      "outputPath": "/mnt/e/software-projects/marquee-company/marquee-backend/MarqueeBackend.DataService/obj/",
+      "projectPath": "E:\\software-projects\\marquee-company\\marquee-backend\\MarqueeBackend.DataService\\MarqueeBackend.DataService.csproj",
+      "packagesPath": "C:\\Users\\julia\\.nuget\\packages\\",
+      "outputPath": "E:\\software-projects\\marquee-company\\marquee-backend\\MarqueeBackend.DataService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/valpen/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\julia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\software-projects\\marquee-company\\marquee-backend\\MarqueeBackend.Entities\\MarqueeBackend.Entities.csproj": {
+              "projectPath": "E:\\software-projects\\marquee-company\\marquee-backend\\MarqueeBackend.Entities\\MarqueeBackend.Entities.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -4180,7 +4208,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

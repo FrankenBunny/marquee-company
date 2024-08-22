@@ -1,8 +1,8 @@
 using AutoMapper;
-using dotnetFullstack.DataService.Repositories.Interfaces;
+using MarqueeBackend.DataService.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace dotnetFullstack.Api.Controllers;
+namespace MarqueeBackend.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

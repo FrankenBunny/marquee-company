@@ -1,10 +1,10 @@
-using dotnetFullstack.DataService.Data;
-using dotnetFullstack.DataService.Repositories.Interfaces;
-using dotnetFullstack.Entities.DbSet;
+using MarqueeBackend.DataService.Data;
+using MarqueeBackend.DataService.Repositories.Interfaces;
+using MarqueeBackend.Entities.DbSet;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace dotnetFullstack.DataService.Repositories;
+namespace MarqueeBackend.DataService.Repositories;
 
 public class PartRepository : GenericRepository<Part>, IPartRepository
 {
@@ -22,7 +22,7 @@ public class PartRepository : GenericRepository<Part>, IPartRepository
             _logger.LogError(
                 e,
                 "{Repo} GetRentablePartAsync function error",
-                typeof(RentableRepository)
+                typeof(PartRepository)
             );
             throw;
         }
