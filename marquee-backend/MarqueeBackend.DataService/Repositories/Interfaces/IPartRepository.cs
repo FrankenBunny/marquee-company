@@ -1,6 +1,6 @@
-using dotnetFullstack.Entities.DbSet;
+using MarqueeBackend.Entities.DbSet;
 
-namespace dotnetFullstack.DataService.Repositories.Interfaces;
+namespace MarqueeBackend.DataService.Repositories.Interfaces;
 
 public interface IPartRepository : IGenericRepository<Part>
 {

@@ -1,6 +1,7 @@
-namespace dotnetFullstack.DataService.Repositories.Interfaces;
+namespace MarqueeBackend.DataService.Repositories.Interfaces;
 
-public interface IGenericRepository<T> where T : class
+public interface IGenericRepository<T>
+    where T : class
 {
     Task<IEnumerable<T>> All();
     Task<T?> GetById(Guid id);

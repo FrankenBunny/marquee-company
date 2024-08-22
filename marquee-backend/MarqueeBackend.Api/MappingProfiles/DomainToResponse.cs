@@ -1,19 +1,29 @@
 using AutoMapper;
-using dotnetFullstack.Entities.DbSet;
-using dotnetFullstack.Entities.Dtos.Requests;
+using MarqueeBackend.Entities.DbSet;
+using MarqueeBackend.Entities.Dtos.Requests;
+using MarqueeBackend.Entities.Dtos.Response;
 
-namespace dotnetFullstack.Api.MappingProfiles;
+namespace MarqueeBackend.Api.MappingProfiles;
 
 public class DomainToResponse : Profile
 {
     public DomainToResponse()
     {
-        CreateMap<Part, CreateRentablePartRequest>()
+        CreateMap<Category, CategoryResponse>()
+            .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.CategoryTitle, opt => opt.MapFrom(src => src.Title))
+            .ForMember(
+                dest => dest.CategoryDescription,
+                opt => opt.MapFrom(src => src.Description)
+            );
+
+        CreateMap<Part, PartResponse>()
             .ForMember(dest => dest.PartTitle, opt => opt.MapFrom(src => src.Title))
             .ForMember(dest => dest.PartNote, opt => opt.MapFrom(src => src.Note));
 
-        CreateMap<Part, UpdateRentablePartRequest>()
-            .ForMember(dest => dest.PartTitle, opt => opt.MapFrom(src => src.Title))
-            .ForMember(dest => dest.PartNote, opt => opt.MapFrom(src => src.Note));
+        CreateMap<Rentable, RentableResponse>()
+            .ForMember(dest => dest.RentableTitle, opt => opt.MapFrom(src => src.Title))
+            .ForMember(dest => dest.RentableNote, opt => opt.MapFrom(src => src.Note))
+            .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId));
     }
 }

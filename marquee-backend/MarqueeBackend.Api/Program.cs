@@ -1,16 +1,19 @@
-using dotnetFullstack.Api.Services;
-using dotnetFullstack.DataService.Data;
-using dotnetFullstack.DataService.Repositories;
-using dotnetFullstack.DataService.Repositories.Interfaces;
+using MarqueeBackend.DataService.Data;
+using MarqueeBackend.DataService.Repositories;
+using MarqueeBackend.DataService.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("SqlServerConnection");
+// SqlServer
+//var connectionString = builder.Configuration.GetConnectionString("SqlServerConnection");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString)); // Ensure UseSqlServer is recognized
+builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("InMemoryDb"));
+
+// SqlServer
+// builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString)); // Ensure UseSqlServer is recognized
 
 builder.Services.AddControllers();
 
@@ -30,7 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    DatabaseMigrationService.DatabaseMigrationServiceInitialization(app);
+    // SqlServer
+    //DatabaseMigrationService.DatabaseMigrationServiceInitialization(app);
 }
 
 app.UseHttpsRedirection();
