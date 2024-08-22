@@ -1,0 +1,15 @@
+services:
+  ms-sql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "youtube2021!YOUTUBE"
+      MSSQL_PID: Express
+    ports:
+      - "1433:1433"
+
+  marquee-api:
+    build:
+      context: .
+    ports:
+      - "8090:8080"
