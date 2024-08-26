@@ -25,12 +25,12 @@ namespace marquee_backend.Controllers.Inventory
             _databaseContext = databaseContext;
         }
 
-        [HttpPost]
+        [HttpPost("")]
         public async Task<ActionResult> AddRentableCategory(RentableCategory newRentableCategory)
         {
             newRentableCategory.Id = Guid.NewGuid();
 
-            var taken_title = _databaseContext.RentableCategories.Where(item =>
+            var taken_title = await _databaseContext.RentableCategories.FirstOrDefaultAsync(item =>
                 item.Title == newRentableCategory.Title
             );
 
@@ -42,7 +42,7 @@ namespace marquee_backend.Controllers.Inventory
 
             return CreatedAtAction(
                 nameof(GetRentableCategory),
-                new { id = newRentableCategory.Id },
+                new { rentableCategoryid = newRentableCategory.Id },
                 newRentableCategory
             );
         }
@@ -107,6 +107,7 @@ namespace marquee_backend.Controllers.Inventory
         }
 
         [HttpDelete]
+        [Route("{rentableCategoryId}")]
         public async Task<IActionResult> RemoveRentableCategory(Guid rentableCategoryId)
         {
             var toBeRemoved = await _databaseContext.RentableCategories.FindAsync(

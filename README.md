@@ -14,6 +14,11 @@ The implementation of the application has been separated into two main headings,
 |Backend|ASP.NET Core|Entity Framework, Swagger|
 |Database|Microsoft SQL Server, Docker||
 
+#### Hosting the Backend
+From container -> [http://localhost:8090/swagger](http://localhost:8090/swagger) <br/>
+From IDE -> [http://localhost:5019/swagger/index.html](http://localhost:5019/swagger/index.html)
+
+
 ### Deployment
 
 The web application is hosted by Vercel and is accessible [here](https://marquee-company.vercel.app).

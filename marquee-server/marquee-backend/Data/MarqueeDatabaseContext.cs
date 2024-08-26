@@ -1,18 +1,30 @@
 ﻿using marquee_backend.Models.Auth;
 using marquee_backend.Models.Inventory;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace marquee_backend.Data;
 
 public class MarqueeDatabaseContext : DbContext
 {
-    public MarqueeDatabaseContext()
-    {
-    }
 
     public MarqueeDatabaseContext(DbContextOptions<MarqueeDatabaseContext> options)
         : base(options)
     {
+        /*
+        var dbCreator = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+
+        if(!dbCreator.CanConnect())
+        {
+            dbCreator.CreateAsync();
+        }
+
+        if (!dbCreator.HasTables())
+        {
+            dbCreator.CreateTablesAsync();
+        }
+        */
     }
 
     // Auth
