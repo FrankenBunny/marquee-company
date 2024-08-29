@@ -1,6 +1,0 @@
-C:\Users\julia\source\repos\marquee-database\marquee-database\bin\Debug\marquee-database.dacpac
-C:\Users\julia\source\repos\marquee-database\marquee-database\bin\Debug\marquee_database.dll
-C:\Users\julia\source\repos\marquee-database\marquee-database\bin\Debug\marquee_database.pdb
-C:\Users\julia\source\repos\marquee-database\marquee-database\obj\Debug\marquee-database.sqlproj.AssemblyReference.cache
-C:\Users\julia\source\repos\marquee-database\marquee-database\obj\Debug\marquee_database.dll
-C:\Users\julia\source\repos\marquee-database\marquee-database\obj\Debug\marquee_database.pdb

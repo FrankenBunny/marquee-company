@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "marquee-database", "marquee-database\marquee-database.sqlproj", "{F20BBE63-BB74-42E9-894F-9484B4D6FCE3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "marquee-backend", "marquee-backend\marquee-backend.csproj", "{EF6A450A-47DC-4A51-86E8-883EC07BFBE5}"
 EndProject
 Global
