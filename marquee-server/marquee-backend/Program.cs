@@ -21,17 +21,23 @@ builder.Services.AddCors(options =>
         });
 });
 // Database context dependency injection
-var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
-var dbName = Environment.GetEnvironmentVariable("DB_NAME");
-var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
+var dbHost = Environment.GetEnvironmentVariable("DB_HOST") ?? "postgres";
+var dbName = Environment.GetEnvironmentVariable("DB_NAME") ?? "marquee-database";
+var dbUser = Environment.GetEnvironmentVariable("DB_USER") ?? "postgres";
+var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? "postgres";
 
-
-var connectionString = $"Server={dbHost};Database={dbName}; User ID=SA; Password={dbPassword}; TrustServerCertificate=true;";
-Console.WriteLine(connectionString);
-builder.Services.AddDbContext<MarqueeDatabaseContext>(options =>
+var connectionString = $"Host={dbHost};Port=5432;Username={dbUser};Password={dbPassword};Database={dbName}";
+builder.Services.AddDbContext<MarqueeDatabaseContext>(options => 
 {
-    options.UseSqlServer(connectionString);
+    options.UseNpgsql(connectionString);
 });
+
+//var connectionString = $"Server={dbHost};Database={dbName};User ID={dbUser};Password={dbPassword};TrustServerCertificate=true;MultipleActiveResultSets=true";
+//Console.WriteLine(connectionString);
+//builder.Services.AddDbContext<MarqueeDatabaseContext>(options =>
+//{
+//    options.UseSqlServer(connectionString);
+//});
 
 //Add application database context
 //builder.Services.AddDbContext<MarqueeDatabaseContext>(options =>
@@ -57,7 +63,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
 
     DatabaseMigrationService.DatabaseMigrationServiceInitialization(app);
 }
