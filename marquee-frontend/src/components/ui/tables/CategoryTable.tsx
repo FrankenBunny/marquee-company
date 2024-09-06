@@ -3,7 +3,6 @@ import { Label } from "@radix-ui/react-label";
 import { Category } from "@/assets/data/category";
 import { CategoryTableComponent } from "./category-table-component";
 import { ColumnDef } from "@tanstack/react-table";
-import { Console } from "console";
 
 export const columns: ColumnDef<Category>[] = [
   {
