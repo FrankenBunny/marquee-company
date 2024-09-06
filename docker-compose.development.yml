@@ -3,19 +3,19 @@ networks:
   frontend:
 
 services:
-  web:
-    build:
-      context: ./marquee-frontend
-      dockerfile: Dockerfile
-    environment:
-      NODE_ENV: Development
-      API_URL: "http://api:8080"
-    depends_on:
-      - api
-    ports:
-      - "3000:3000"
-    networks:
-     - frontend
+#  web:
+#    build:
+#      context: ./marquee-frontend
+#      dockerfile: Dockerfile.Development
+#    #environment:
+#    #  NODE_ENV: Development
+#    #  API_URL: "http://api:8080"
+#    depends_on:
+#      - api
+#    ports:
+#      - "5173:5173"
+#    networks:
+#     - frontend
 
   api:
     build:
