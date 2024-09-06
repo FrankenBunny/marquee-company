@@ -3,6 +3,7 @@ import { Label } from "@radix-ui/react-label";
 import { Category } from "@/assets/data/category";
 import { CategoryTableComponent } from "./category-table-component";
 import { ColumnDef } from "@tanstack/react-table";
+import { Console } from "console";
 
 export const columns: ColumnDef<Category>[] = [
   {
@@ -21,11 +22,13 @@ function CategoryTable() {
     queryKey: ["categoryData"],
     queryFn: async () => {
       const response = await fetch(
-        "http://localhost:5019/api/rentablecategory"
+        "http://localhost:8090/api/RentableCategory"
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+      console.log("Response json "+ response.json());
+      
       return response.json();
     },
   });
