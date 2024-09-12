@@ -1,0 +1,65 @@
+networks:
+  backend:
+  frontend:
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.Development
+    restart: always
+    ports:
+      - "3000:3000"
+    command: "npm run dev"
+    volumes:
+      - ./frontend/src:/app/src:readonly
+    environment:
+      - CHOKIDAR_POLLING=true
+    networks:
+      - frontend
+
+  api-inventory:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile.Development
+    ports:
+      - "8090:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+        restart: true
+    volumes:
+      - ./backend/inventory:/api/inventory/src:readonly
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DB_HOST=${POST_HOST}
+      - DB_NAME=${POST_NAME}
+      - DB_USER=${POST_USER}
+      - DB_PASSWORD=${POST_PASSWORD}
+    networks:
+      - backend
+      - frontend
+
+  postgres:
+    container_name: ${POST_HOST}
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POST_USER}
+      POSTGRES_PASSWORD: ${POST_PASSWORD}
+      POSTGRES_DB: ${POST_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        ["CMD", "pg_isready", "-q", "-d", "${POST_NAME}", "-U", "${POST_USER}"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    networks:
+      - backend
+
+volumes:
+  pgdata:
