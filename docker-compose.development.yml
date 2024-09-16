@@ -41,7 +41,7 @@ services:
       - frontend
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host('frankenbunny.dev')"
+      - "traefik.http.routers.frontend.rule=Host('frankenbunny.com')"
       - "traefik.hhtp.routers.frontend.entryPoints=websecure"
       - "traefik.http.routers.frontend.tls.certificateresolvers=marqueeresolver"
 
