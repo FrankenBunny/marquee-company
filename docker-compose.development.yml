@@ -11,6 +11,8 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entryPoints.websecure.address=:443"
       - "--certificatesresolvers.marqueeresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.marqueeresolver.acme.dnschallenge=true"
+      - "--certificatesresolvers.marqueeresolver.acme.dnschallenge.provider=cloudflare"
       - "--certificatesresolvers.marqueeresolver.acme.email=juliajsson@hotmail.com"
       - "--certificatesresolvers.marqueeresolver.acme.storage=/encrypt/acme.json"
     ports:
@@ -43,7 +45,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host('frankenbunny.com')"
       - "traefik.hhtp.routers.frontend.entryPoints=websecure"
-      - "traefik.http.routers.frontend.tls.certificateresolvers=marqueeresolver"
+      - "traefik.http.routers.frontend.tls.certificatesresolvers=marqueeresolver"
 
   api-inventory:
     build:
@@ -74,6 +76,7 @@ services:
     depends_on:
       reverse-proxy:
         condition: service_started
+        restart: always
     ports:
       - "5432:5432"
     environment:
