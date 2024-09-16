@@ -3,7 +3,29 @@ networks:
   frontend:
 
 services:
+  reverse-proxy:
+    image: traefik:v3.1
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.marqueeresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.marqueeresolver.acme.email=juliajsson@hotmail.com"
+      - "--certificatesresolvers.marqueeresolver.acme.storage=/encrypt/acme.json"
+    ports:
+      # The HTTP port
+      - "443:443"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      - encrypt:/encrypt
+      - /var/run/docker.sock:/var/run/docker.sock
+
   frontend:
+    depends_on:
+      api-inventory:
+        condition: service_started
     build:
       context: ./frontend
       dockerfile: Dockerfile.Development
@@ -17,6 +39,11 @@ services:
       - CHOKIDAR_POLLING=true
     networks:
       - frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host('frankenbunny.dev')"
+      - "traefik.hhtp.routers.frontend.entryPoints=websecure"
+      - "traefik.http.routers.frontend.tls.certificateresolvers=marqueeresolver"
 
   api-inventory:
     build:
@@ -44,6 +71,9 @@ services:
     container_name: ${POST_HOST}
     image: postgres:latest
     restart: always
+    depends_on:
+      reverse-proxy:
+        condition: service_started
     ports:
       - "5432:5432"
     environment:
@@ -63,3 +93,4 @@ services:
 
 volumes:
   pgdata:
+  encrypt:
