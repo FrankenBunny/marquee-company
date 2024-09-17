@@ -8,21 +8,24 @@ services:
     command:
       - "--api.insecure=true"
       - "--providers.docker"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entryPoints.websecure.address=:443"
-      - "--certificatesresolvers.marqueeresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.marqueeresolver.acme.dnschallenge=true"
-      - "--certificatesresolvers.marqueeresolver.acme.dnschallenge.provider=cloudflare"
-      - "--certificatesresolvers.marqueeresolver.acme.email=juliajsson@hotmail.com"
-      - "--certificatesresolvers.marqueeresolver.acme.storage=/encrypt/acme.json"
+      - "--entrypoints.web.address=:80" # Define HTTP entry point
+      - "--entrypoints.websecure.address=:443" # Define HTTPS entry point
+    #  - "--certificatesresolvers.myresolver.acme.tlschallenge=true" # Optional for automatic HTTPS with Let's Encrypt (adjust for production)
+    #  - "--certificatesresolvers.myresolver.acme.email=youremail@example.com" # Required if using Let's Encrypt
+    #  - "--certificatesresolvers.myresolver.acme.storage=/encrypt/acme.json"
     ports:
       # The HTTP port
-      - "443:443"
+      - "80:80"
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
+      # The HTTPS port
+      - "443:443"
     volumes:
       - encrypt:/encrypt
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - backend
+      - frontend
 
   frontend:
     depends_on:
@@ -32,20 +35,19 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.Development
     restart: always
-    ports:
-      - "3000:3000"
     command: "npm run dev"
     volumes:
       - ./frontend/src:/app/src:readonly
     environment:
       - CHOKIDAR_POLLING=true
+    ports:
+      - "3000:3000"
     networks:
       - frontend
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host('frankenbunny.com')"
-      - "traefik.hhtp.routers.frontend.entryPoints=websecure"
-      - "traefik.http.routers.frontend.tls.certificatesresolvers=marqueeresolver"
+      - "traefik.http.routers.frontend.rule=Host(`frankenbunny.com`)"
+      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
 
   api-inventory:
     build:
@@ -68,15 +70,15 @@ services:
     networks:
       - backend
       - frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`frankenbunny.com`)"
+      - "traefik.http.services.frontend.loadbalancer.server.port=8090"
 
   postgres:
     container_name: ${POST_HOST}
     image: postgres:latest
     restart: always
-    depends_on:
-      reverse-proxy:
-        condition: service_started
-        restart: always
     ports:
       - "5432:5432"
     environment:
