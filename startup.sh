@@ -6,6 +6,8 @@ fi
 
 case $1 in 
   "build" )
+    echo "Initializing reverse proxy..."
+    docker-compose -f docker-compose.development.yml up --build -d reverse-proxy
     echo "Initializing environment..."
     export $(grep -v "^#" .env.development | xargs)
     docker-compose -f docker-compose.development.yml up --build -d postgres
