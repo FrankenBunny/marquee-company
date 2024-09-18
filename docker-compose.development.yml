@@ -72,8 +72,8 @@ services:
       - frontend
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`frankenbunny.com`)"
-      - "traefik.http.services.frontend.loadbalancer.server.port=8090"
+      - "traefik.http.routers.api-inventory.rule=Host(`frankenbunny.com`)"
+      - "traefik.http.services.api-inventory.loadbalancer.server.port=8090"
 
   postgres:
     container_name: ${POST_HOST}
