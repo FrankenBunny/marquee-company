@@ -48,13 +48,14 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`frankenbunny.com`)"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
+      - "traefik.http.routers.api-inventory.entrypoints=web"
 
   api-inventory:
     build:
       context: ./backend/
       dockerfile: Dockerfile.Development
     ports:
-      - "8090:8080"
+      - "8090:8081"
     depends_on:
       postgres:
         condition: service_healthy
@@ -73,7 +74,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api-inventory.rule=Host(`frankenbunny.com`)"
-      - "traefik.http.services.api-inventory.loadbalancer.server.port=8090"
+      - "traefik.http.services.api-inventory.loadbalancer.server.port=8081"
+      - "traefik.http.routers.api-inventory.entrypoints=web"      
 
   postgres:
     container_name: ${POST_HOST}
