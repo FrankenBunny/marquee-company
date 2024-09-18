@@ -1,0 +1,30 @@
+{
+  "RentableCategories": [
+    {
+      "Title": "Roof",
+      "Description": "This is a sample item."
+    },
+    {
+      "Title": "Wall",
+      "Description": "This is a sample item."
+    },
+    {
+      "Title": "Tent",
+      "Description": "This is a sample item."
+    }
+  ],
+  "Rentables": [
+    {
+      "Title": "Marquee 10m",
+      "Description": "This is a sample item."
+    },
+    {
+      "Title": "Marquee 15m",
+      "Description": "This is a sample item."
+    },
+    {
+      "Title": "Tent",
+      "Description": "This is a sample item."
+    }
+  ]
+}
