@@ -10,6 +10,9 @@ services:
       - "--providers.docker"
       - "--entrypoints.web.address=:80" # Define HTTP entry point
       - "--entrypoints.websecure.address=:443" # Define HTTPS entry point
+    #  - "--certificatesresolvers.myresolver.acme.tlschallenge=true" # Optional for automatic HTTPS with Let's Encrypt (adjust for production)
+    #  - "--certificatesresolvers.myresolver.acme.email=youremail@example.com" # Required if using Let's Encrypt
+    #  - "--certificatesresolvers.myresolver.acme.storage=/encrypt/acme.json"
     ports:
       # The HTTP port
       - "80:80"
@@ -43,7 +46,7 @@ services:
       - frontend
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`web.localhost`)"
+      - "traefik.http.routers.frontend.rule=Host(`frankenbunny.com`)"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
       - "traefik.http.routers.api-inventory.entrypoints=web"
 
@@ -52,7 +55,7 @@ services:
       context: ./backend/
       dockerfile: Dockerfile.Development
     ports:
-      - "8090:8080"
+      - "8090:8081"
     depends_on:
       postgres:
         condition: service_healthy
@@ -70,8 +73,8 @@ services:
       - frontend
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.api-inventory.rule=Host(`api.localhost`)"
-      - "traefik.http.services.api-inventory.loadbalancer.server.port=8080"
+      - "traefik.http.routers.api-inventory.rule=Host(`frankenbunny.com`)"
+      - "traefik.http.services.api-inventory.loadbalancer.server.port=8081"
       - "traefik.http.routers.api-inventory.entrypoints=web"
 
   postgres:
