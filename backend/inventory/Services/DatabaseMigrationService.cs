@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using marquee_backend.Data;
 using marquee_backend.Models.Inventory;
+using marquee_backend.Models.Auth;
 
 namespace MarqueeBackend.Api.Services;
 
@@ -28,6 +29,15 @@ public class DatabaseMigrationService
                 new RentableCategory { Id = Guid.NewGuid(), Title = "Tents", Description = "This is a sample category" },
                 new RentableCategory { Id = Guid.NewGuid(), Title = "Roofs", Description = "This is a sample category" },
                 new RentableCategory { Id = Guid.NewGuid(), Title = "Walls", Description = "This is a sample category" }
+            );
+        }
+
+        if (!databaseContext.Users.Any())
+        {
+            databaseContext.Users.AddRange(
+            new User { Id = Guid.NewGuid(), Name = "Tents", Username = "", PasswordHash = "123", Email = "This is a sample category" },
+            new User { Id = Guid.NewGuid(), Name = "Roofs", Username = "", PasswordHash = "123", Email = "This is a sample category" },
+            new User { Id = Guid.NewGuid(), Name = "Walls", Username = "", PasswordHash = "123", Email = "This is a sample category" }
             );
         }
 

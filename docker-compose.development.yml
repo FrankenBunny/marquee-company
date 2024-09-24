@@ -43,7 +43,7 @@ services:
       - frontend
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`web.localhost`)"
+      - "traefik.http.routers.frontend.rule=Host(`localhost`)"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
       - "traefik.http.routers.api-inventory.entrypoints=web"
 
@@ -68,11 +68,6 @@ services:
     networks:
       - backend
       - frontend
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.api-inventory.rule=Host(`api.localhost`)"
-      - "traefik.http.services.api-inventory.loadbalancer.server.port=8080"
-      - "traefik.http.routers.api-inventory.entrypoints=web"
 
   postgres:
     container_name: ${POST_HOST}
