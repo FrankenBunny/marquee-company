@@ -35,9 +35,9 @@ public class DatabaseMigrationService
         if (!databaseContext.Users.Any())
         {
             databaseContext.Users.AddRange(
-            new User { Id = Guid.NewGuid(), Name = "Adam", Username = "", PasswordHash = "123", Email = "adam@test.com" },
-            new User { Id = Guid.NewGuid(), Name = "Benjamin", Username = "", PasswordHash = "123", Email = "benjamin@test.com" },
-            new User { Id = Guid.NewGuid(), Name = "Carl", Username = "", PasswordHash = "123", Email = "carl@test.com" }
+            new User { Id = Guid.NewGuid(), Name = "Adam", Username = "Adam", PasswordHash = "123", Email = "adam@test.com" },
+            new User { Id = Guid.NewGuid(), Name = "Benjamin", Username = "Benjamin", PasswordHash = "123", Email = "benjamin@test.com" },
+            new User { Id = Guid.NewGuid(), Name = "Carl", Username = "Carl", PasswordHash = "123", Email = "carl@test.com" }
             );
         }
 
