@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace marquee_backend.Controllers.Auth
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly MarqueeDatabaseContext _databaseContext;
