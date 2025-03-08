@@ -68,6 +68,7 @@ services:
       - DB_NAME=${POST_NAME}
       - DB_USER=${POST_USER}
       - DB_PASSWORD=${POST_PASSWORD}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
     networks:
       - backend
       - frontend

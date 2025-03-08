@@ -1,7 +1,9 @@
+.env*
 .api-token
 
 # From .NET Core
 .vs/
+
 
 # User-specific files
 *.suo
@@ -15,21 +17,20 @@
 # config tiles
 .config
 
-
 # Migrations
 backend/Migrations
 
 # Build results
-backend/[Dd]ebug/
-backend/[Dd]ebugPublic/
-backend/[Rr]elease/
-backend/[Rr]eleases/
-backend/x64/
-backend/x86/
-backend/bld/
-backend/[Bb]in/
-backend/[Oo]bj/
-backend/[Ll]og/
+backend/inventory/[Dd]ebug/
+backend/inventory/[Dd]ebugPublic/
+backend/inventory/[Rr]elease/
+backend/inventory/[Rr]eleases/
+backend/inventory/x64/
+backend/inventory/x86/
+backend/inventory/bld/
+backend/inventory/[Bb]in/
+backend/inventory/[Oo]bj/
+backend/inventory/[Ll]og/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/

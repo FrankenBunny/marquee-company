@@ -7,11 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 // CORS
+var allowedOriginsEnv = Environment.GetEnvironmentVariable("CORS_ALLOWED_ORIGINS");
+var allowedOrigins = allowedOriginsEnv?.Split(',') ?? new string[] { };
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
+    if (builder.Environment.IsDevelopment()) {
+        options.AddPolicy(name: MyAllowSpecificOrigins,
         policy =>
         {
             policy.WithOrigins("http://web.localhost:3000", "http://localhost:3000") 
@@ -19,6 +22,16 @@ builder.Services.AddCors(options =>
                   .AllowAnyHeader()
                   .AllowCredentials(); // Allow credentials if needed (e.g., cookies)
         });
+    } else {
+        options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins(allowedOrigins) 
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials(); // Allow credentials if needed (e.g., cookies)
+        });
+    }
 });
 
 // Database context dependency injection

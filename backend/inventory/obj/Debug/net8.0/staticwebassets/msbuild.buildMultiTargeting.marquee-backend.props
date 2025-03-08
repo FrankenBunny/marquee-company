@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../build/marquee-backend.props" />
-</Project>
